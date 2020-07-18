@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict, List
 
 from pydantic import BaseModel
 
@@ -16,7 +16,7 @@ class EncounterCondition(BaseModel):
     id: int
     name: str
     names: List[basics.Name]
-    values: List[EncounterConditionValue]
+    values: List[Dict]
 
 
 class EncounterConditionValue(BaseModel):

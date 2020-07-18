@@ -1,18 +1,14 @@
-from typing import List
+from typing import Dict, List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics
-from pokedex.models import commons
-from pokedex.models import encounters
-from pokedex.models import games
-from pokedex.models import pokemon
+from pokedex.models import basics, commons, encounters, games, pokemon
 
 
 class Location(BaseModel):
     id: int
     name: str
-    region: Region
+    region: Dict
     names: List[basics.Name]
     game_indices: List[commons.GenerationGameIndex]
     areas: List[LocationArea]

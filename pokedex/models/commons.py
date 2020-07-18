@@ -2,18 +2,16 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import encounters
-from pokedex.models import games
-from pokedex.models import machines
+from pokedex.models import encounters, games, machines
 
 
-# class Language(BaseModel):
-#     id: int
-#     name: str
-#     official: bool
-#     iso639: str
-#     iso3166: str
-#     names: List[Name]
+class Language(BaseModel):
+    id: int
+    name: str
+    official: bool
+    iso639: str
+    iso3166: str
+    names: List[Name]
 
 
 class APIResource(BaseModel):
@@ -54,9 +52,9 @@ class MachineVersionDetail(BaseModel):
     version_group: games.VersionGroup
 
 
-# class Name(BaseModel):
-#     name: str
-#     language: Language
+class Name(BaseModel):
+    name: str
+    language: Language
 
 
 class NamedAPIResource(BaseModel):

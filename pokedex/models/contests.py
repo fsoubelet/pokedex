@@ -2,10 +2,7 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics
-from pokedex.models import berries
-from pokedex.models import commons
-from pokedex.models import moves
+from pokedex.models import basics, berries, commons, moves
 
 
 class ContestType(BaseModel):

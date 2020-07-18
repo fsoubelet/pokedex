@@ -2,14 +2,7 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics
-from pokedex.models import berries
-from pokedex.models import commons
-from pokedex.models import evolution
-from pokedex.models import games
-from pokedex.models import items
-from pokedex.models import locations
-from pokedex.models import moves
+from pokedex.models import basics, berries, commons, evolution, games, items, locations, moves
 
 
 class Ability(BaseModel):

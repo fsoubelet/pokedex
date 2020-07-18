@@ -2,11 +2,7 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics
-from pokedex.models import commons
-from pokedex.models import evolution
-from pokedex.models import games
-from pokedex.models import pokemon
+from pokedex.models import basics, commons, evolution, games, pokemon
 
 
 class Item(BaseModel):

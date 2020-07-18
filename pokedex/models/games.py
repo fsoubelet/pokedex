@@ -2,11 +2,7 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics
-from pokedex.models import commons
-from pokedex.models import locations
-from pokedex.models import moves
-from pokedex.models import pokemon
+from pokedex.models import basics, commons, locations, moves, pokemon
 
 
 class Generation(BaseModel):

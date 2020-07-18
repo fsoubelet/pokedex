@@ -2,10 +2,7 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics
-from pokedex.models import contests
-from pokedex.models import items
-from pokedex.models import pokemon
+from pokedex.models import basics, contests, items, pokemon
 
 
 class Berry(BaseModel):

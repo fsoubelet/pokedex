@@ -1,8 +1,6 @@
 from pydantic import BaseModel
 
-from pokedex.models import games
-from pokedex.models import items
-from pokedex.models import moves
+from pokedex.models import games, items, moves
 
 
 class Machine(BaseModel):
