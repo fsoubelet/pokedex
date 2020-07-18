@@ -2,33 +2,20 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics, commons, contests, games, pokemon
+from pokedex.models.commons import (
+    APIResource,
+    Description,
+    MachineVersionDetail,
+    Name,
+    NamedAPIResource,
+    VerboseEffect,
+)
+from pokedex.models.pokemon import AbilityEffectChange
 
 
-class Move(BaseModel):
-    id: int
-    name: str
-    accuracy: int
-    effect_chance: int
-    pp: int
-    priority: int
-    power: int
-    contest_combos: ContestComboSets
-    contest_type: contests.ContestType
-    contest_effect: contests.ContestEffect
-    damage_class: MoveDamageClass
-    effect_entries: List[commons.VerboseEffect]
-    effect_changes: List[pokemon.AbilityEffectChange]
-    flavor_text_entries: List[MoveFlavorText]
-    generation: games.Generation
-    machines: List[commons.MachineVersionDetail]
-    meta: MoveMetaData
-    names: List[basics.Name]
-    past_values: List[PastMoveStatValues]
-    stat_changes: List[MoveStatChange]
-    super_contest_effect: contests.SuperContestEffect
-    target: MoveTarget
-    type: pokemon.Type
+class ContestComboDetail(BaseModel):
+    use_before: List[NamedAPIResource]
+    use_after: List[NamedAPIResource]
 
 
 class ContestComboSets(BaseModel):
@@ -36,20 +23,15 @@ class ContestComboSets(BaseModel):
     super: ContestComboDetail
 
 
-class ContestComboDetail(BaseModel):
-    use_before: List[Move]
-    use_after: List[Move]
-
-
 class MoveFlavorText(BaseModel):
     flavor_text: str
-    language: basics.Language
-    version_group: games.VersionGroup
+    language: NamedAPIResource
+    version_group: NamedAPIResource
 
 
 class MoveMetaData(BaseModel):
-    ailment: MoveAilment
-    category: MoveCategory
+    ailment: NamedAPIResource
+    category: NamedAPIResource
     min_hits: int
     max_hits: int
     min_turns: int
@@ -62,60 +44,86 @@ class MoveMetaData(BaseModel):
     stat_chance: int
 
 
-class MoveStatChange(BaseModel):
-    change: int
-    stat: pokemon.Stat
-
-
 class PastMoveStatValues(BaseModel):
     accuracy: int
     effect_chance: int
     power: int
     pp: int
-    effect_entries: List[commons.VerboseEffect]
-    type: pokemon.Type
-    version_group: games.VersionGroup
+    effect_entries: List[VerboseEffect]
+    type: NamedAPIResource
+    version_group: NamedAPIResource
+
+
+class MoveStatChange(BaseModel):
+    change: int
+    stat: NamedAPIResource
+
+
+class Move(BaseModel):
+    id: int
+    name: str
+    accuracy: int
+    effect_chance: int
+    pp: int
+    priority: int
+    power: int
+    contest_combos: ContestComboSets
+    contest_type: NamedAPIResource
+    contest_effect: APIResource
+    damage_class: NamedAPIResource
+    effect_entries: List[VerboseEffect]
+    effect_changes: List[AbilityEffectChange]
+    flavor_text_entries: List[MoveFlavorText]
+    generation: NamedAPIResource
+    machines: List[MachineVersionDetail]
+    meta: MoveMetaData
+    names: List[Name]
+    past_values: List[PastMoveStatValues]
+    stat_changes: List[MoveStatChange]
+    super_contest_effect: APIResource
+    target: NamedAPIResource
+    type: NamedAPIResource
 
 
 class MoveAilment(BaseModel):
     id: int
     name: str
-    moves: List[Move]
-    names: List[basics.Name]
+    moves: List[NamedAPIResource]
+    names: List[Name]
 
 
 class MoveBattleStyle(BaseModel):
     id: int
     name: str
-    names: List[basics.Name]
+    names: List[Name]
 
 
 class ModelName(BaseModel):
     id: int
     name: str
-    moves: List[Move]
-    descriptions: List[commons.Description]
+    moves: List[NamedAPIResource]
+    descriptions: List[Description]
 
 
 class MoveDamageClass(BaseModel):
     id: int
     name: str
-    descriptions: List[commons.Description]
-    moves: List[Move]
-    names: List[basics.Name]
+    descriptions: List[Description]
+    moves: List[NamedAPIResource]
+    names: List[Name]
 
 
 class MoveLearnMethod(BaseModel):
     id: int
     name: str
-    descriptions: List[commons.Description]
-    names: List[basics.Name]
-    version_groups: List[games.VersionGroup]
+    descriptions: List[Description]
+    names: List[Name]
+    version_groups: List[NamedAPIResource]
 
 
 class MoveTarget(BaseModel):
     id: int
     name: str
-    descriptions: List[commons.Description]
-    moves: List[Move]
-    names: List[basics.Name]
+    descriptions: List[Description]
+    moves: List[NamedAPIResource]
+    names: List[Name]

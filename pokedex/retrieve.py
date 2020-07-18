@@ -2,27 +2,6 @@ from typing import Dict, List
 
 import requests
 from loguru import logger
-from pydantic import BaseModel
-
-
-class Pokemon(BaseModel):
-    id: int
-    name: str
-    base_experience: int
-    height: int
-    is_default: bool
-    order: int
-    weight: int
-    abilities: List[Dict]
-    forms: List[Dict]
-    game_indices: List[Dict]
-    held_items: List[Dict]
-    location_area_encounters: str
-    moves: List[Dict]
-    sprites: Dict
-    species: Dict
-    stats: List[Dict]
-    types: List[Dict]
 
 
 def format_query_url(pokemon_name: str) -> str:

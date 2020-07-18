@@ -2,32 +2,32 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics, berries, commons, moves
-
-
-class ContestType(BaseModel):
-    id: int
-    name: str
-    berry_flavor: berries.BerryFlavor
-    names: List[ContestName]
+from pokedex.models.commons import Effect, FlavorText, NamedAPIResource
 
 
 class ContestName(BaseModel):
     name: str
     color: str
-    language: basics.Language
+    language: NamedAPIResource
+
+
+class ContestType(BaseModel):
+    id: int
+    name: str
+    berry_flavor: NamedAPIResource
+    names: List[ContestName]
 
 
 class ContestEffect(BaseModel):
     id: int
     appeal: int
     jam: int
-    effect_entries: List[commons.Effect]
-    flavor_text_entries: List[commons.FlavorText]
+    effect_entries: List[Effect]
+    flavor_text_entries: List[FlavorText]
 
 
 class SuperContestEffect(BaseModel):
     id: int
     appeal: int
-    flavor_text_entries: List[commons.FlavorText]
-    moves: List[moves.Move]
+    flavor_text_entries: List[FlavorText]
+    moves: List[NamedAPIResource]

@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 
-from pokedex.models import games, items, moves
+from pokedex.models.commons import NamedAPIResource
 
 
 class Machine(BaseModel):
     id: int
-    item: items.Item
-    move: moves.Move
-    version_group: games.VersionGroup
+    item: NamedAPIResource
+    move: NamedAPIResource
+    version_group: NamedAPIResource

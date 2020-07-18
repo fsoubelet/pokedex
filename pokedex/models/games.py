@@ -2,50 +2,50 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics, commons, locations, moves, pokemon
+from pokedex.models.commons import Description, Name, NamedAPIResource
 
 
 class Generation(BaseModel):
     id: int
     name: str
-    abilities: List[pokemon.Ability]
-    names: List[basics.Name]
-    main_region: locations.Region
-    moves: List[moves.Move]
-    pokemon_species: List[pokemon.PokemonSpecies]
-    types: List[pokemon.Type]
-    version_groups: List[VersionGroup]
+    abilities: List[NamedAPIResource]
+    names: List[Name]
+    main_region: NamedAPIResource
+    moves: List[NamedAPIResource]
+    pokemon_species: List[NamedAPIResource]
+    types: List[NamedAPIResource]
+    version_groups: List[NamedAPIResource]
+
+
+class PokemonEntry(BaseModel):
+    entry_number: int
+    pokemon_species: NamedAPIResource
 
 
 class Pokedex(BaseModel):
     id: int
     name: str
     is_main_series: bool
-    descriptions: List[commons.Description]
-    names: List[basics.Name]
+    descriptions: List[Description]
+    names: List[Name]
     pokemon_entries: List[PokemonEntry]
-    region: locations.Region
-    version_groups: List[VersionGroup]
-
-
-class PokemonEntry(BaseModel):
-    entry_number: int
-    pokemon_species: pokemon.PokemonSpecies
+    region: NamedAPIResource
+    version_groups: List[NamedAPIResource]
 
 
 class Version(BaseModel):
     id: int
     name: str
-    names: List[basics.Name]
-    version_group: VersionGroup
+    names: List[Name]
+    version_group: NamedAPIResource
 
 
 class VersionGroup(BaseModel):
     id: int
     name: str
     order: int
-    generation: Generation
-    move_learn_methods: List[moves.MoveLearnMethod]
-    pokedexes: List[Pokedex]
-    regions: List[locations.Region]
-    versions: List[Version]
+    generation: NamedAPIResource
+    move_learn_methods: List[NamedAPIResource]
+    pokedexes: List[NamedAPIResource]
+    regions: List[NamedAPIResource]
+    versions: List[NamedAPIResource]

@@ -1,26 +1,26 @@
-from typing import Dict, List
+from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics
+from pokedex.models.commons import Name, NamedAPIResource
 
 
 class EncounterMethod(BaseModel):
     id: int
     name: str
     order: int
-    names: List[basics.Name]
+    names: List[Name]
 
 
 class EncounterCondition(BaseModel):
     id: int
     name: str
-    names: List[basics.Name]
-    values: List[Dict]
+    names: List[Name]
+    values: List[NamedAPIResource]
 
 
 class EncounterConditionValue(BaseModel):
     id: int
     name: str
-    condition: EncounterCondition
-    names: List[basics.Name]
+    condition: NamedAPIResource
+    names: List[Name]

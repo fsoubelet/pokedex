@@ -2,7 +2,31 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics, commons, evolution, games, pokemon
+from pokedex.models.commons import (
+    APIResource,
+    Description,
+    Effect,
+    GenerationGameIndex,
+    MachineVersionDetail,
+    Name,
+    NamedAPIResource,
+    VerboseEffect,
+    VersionGroupFlavorText,
+)
+
+
+class ItemSprites(BaseModel):
+    default: str
+
+
+class ItemHolderPokemonVersionDetail(BaseModel):
+    rarity: int
+    version: NamedAPIResource
+
+
+class ItemHolderPokemon(BaseModel):
+    pokemon: NamedAPIResource
+    version_details: List[ItemHolderPokemonVersionDetail]
 
 
 class Item(BaseModel):
@@ -10,58 +34,44 @@ class Item(BaseModel):
     name: str
     cost: int
     fling_power: int
-    fling_effect: ItemFlingEffect
-    attributes: List[ItemAttribute]
-    category: ItemCategory
-    effect_entries: List[commons.VerboseEffect]
-    flavor_text_entries: List[commons.VersionGroupFlavorText]
-    game_indices: List[commons.GenerationGameIndex]
-    names: List[basics.Name]
+    fling_effect: NamedAPIResource
+    attributes: List[NamedAPIResource]
+    category: NamedAPIResource
+    effect_entries: List[VerboseEffect]
+    flavor_text_entries: List[VersionGroupFlavorText]
+    game_indices: List[GenerationGameIndex]
+    names: List[Name]
     sprites: ItemSprites
     held_by_pokemon: List[ItemHolderPokemon]
-    baby_trigger_for: evolution.EvolutionChain
-    machines: List[commons.MachineVersionDetail]
-
-
-class ItemSprites(BaseModel):
-    default: str
-
-
-class ItemHolderPokemon(BaseModel):
-    pokemon: pokemon.Pokemon
-    version_details: List[ItemHolderPokemonVersionDetail]
-
-
-class ItemHolderPokemonVersionDetail(BaseModel):
-    rarity: int
-    version: games.Version
+    baby_trigger_for: APIResource
+    machines: List[MachineVersionDetail]
 
 
 class ItemAttribute(BaseModel):
     id: int
     name: str
-    items: List[Item]
-    names: List[basics.Name]
-    descriptions: List[commons.Description]
+    items: List[NamedAPIResource]
+    names: List[Name]
+    descriptions: List[Description]
 
 
 class ItemCategory(BaseModel):
     id: int
     name: str
-    items: List[Item]
-    names: List[basics.Name]
-    pocket: ItemPocket
+    items: List[NamedAPIResource]
+    names: List[Name]
+    pocket: NamedAPIResource
 
 
 class ItemFlingEffect(BaseModel):
     id: int
     name: str
-    effect_entries: List[commons.Effect]
-    items: List[Item]
+    effect_entries: List[Effect]
+    items: List[NamedAPIResource]
 
 
 class ItemPocket(BaseModel):
     id: int
     name: str
-    categories: List[ItemCategory]
-    names: List[basics.Name]
+    categories: List[NamedAPIResource]
+    names: List[Name]

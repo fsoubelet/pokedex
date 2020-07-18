@@ -2,45 +2,45 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import basics, items, locations, moves, pokemon
-
-
-class EvolutionChain(BaseModel):
-    id: int
-    baby_trigger_item: items.Item
-    chain: ChainLink
-
-
-class ChainLink(BaseModel):
-    is_baby: bool
-    species: pokemon.PokemonSpecies
-    evolution_details: List[EvolutionDetail]
-    evolves_to: List[ChainLink]
+from pokedex.models.commons import Name, NamedAPIResource
 
 
 class EvolutionDetail(BaseModel):
-    item: items.Item
-    trigger: EvolutionTrigger
+    item: NamedAPIResource
+    trigger: NamedAPIResource
     gender: int
-    held_item: items.Item
-    known_move: moves.Move
-    known_move_type: pokemon.Type
-    location: locations.Location
+    held_item: NamedAPIResource
+    known_move: NamedAPIResource
+    known_move_type: NamedAPIResource
+    location: NamedAPIResource
     min_level: int
     min_happiness: int
     min_beauty: int
     min_affection: int
     needs_overworld_rain: bool
-    party_species: pokemon.PokemonSpecies
-    party_type: pokemon.Type
+    party_species: NamedAPIResource
+    party_type: NamedAPIResource
     relative_physical_stats: int
     time_of_day: str
-    trade_species: pokemon.PokemonSpecies
+    trade_species: NamedAPIResource
     turn_upside_down: bool
+
+
+class ChainLink(BaseModel):
+    is_baby: bool
+    species: NamedAPIResource
+    evolution_details: List[EvolutionDetail]
+    evolves_to: List[ChainLink]
+
+
+class EvolutionChain(BaseModel):
+    id: int
+    baby_trigger_item: NamedAPIResource
+    chain: ChainLink
 
 
 class EvolutionTrigger(BaseModel):
     id: int
     name: str
-    names: List[basics.Name]
-    pokemon_species: List[pokemon.PokemonSpecies]
+    names: List[Name]
+    pokemon_species: List[NamedAPIResource]

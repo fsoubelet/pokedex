@@ -2,18 +2,18 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models import commons
+from pokedex.models.commons import APIResource, NamedAPIResource
 
 
 class APIResourceList(BaseModel):
     count: int
     next: str
     previous: bool
-    results: List[commons.APIResource]
+    results: List[APIResource]
 
 
 class NamedAPIResourceList(BaseModel):
     count: int
     next: str
     previous: bool
-    results: List[commons.NamedAPIResource]
+    results: List[NamedAPIResource]
