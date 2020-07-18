@@ -4,7 +4,7 @@ Model classes for the 'Evolution' endpoint objects. Available endpoints are:
 - Evolution Triggers (https://pokeapi.co/api/v2/evolution-trigger/{id or name}/)
 """
 
-from typing import List
+from typing import List, Dict
 
 from pydantic import BaseModel
 
@@ -36,7 +36,7 @@ class ChainLink(BaseModel):
     is_baby: bool
     species: NamedAPIResource
     evolution_details: List[EvolutionDetail]
-    evolves_to: List[ChainLink]
+    evolves_to: List[Dict]  # technically is List[ChainLink] but that would NameError
 
 
 class EvolutionChain(BaseModel):

@@ -3,7 +3,7 @@ from typing import Dict, List, Union
 import requests
 from loguru import logger
 
-from pokedex.models.pokemon import Pokemon
+from pokedex.models import Pokemon
 
 
 class PokeClient:
@@ -35,10 +35,16 @@ class PokeClient:
         Returns:
             A Pokemon oject of the item_id's data.
         """
-        pokemon_query_url: str = self.format_query_url(pokemon_id)
+        if not self._is_valid_id(pokemon_id):
+            logger.error(
+                f"The provided pokemon ID is of type '{type(pokemon_id)}' but should be "
+                f"either 'int' or 'string'"
+            )
+
+        pokemon_query_url: str = self.format_query_url(item_id=pokemon_id, item_type="pokemon")
 
         logger.debug(f"Sending GET request for data for pokemon '{pokemon_id}'")
-        response: requests.Response = requests.get(query_url)
+        response: requests.Response = requests.get(pokemon_query_url)
 
         if response.status_code != 200:
             logger.error(f"Expected status code 200 but received {response.status_code}, aborting")
@@ -46,3 +52,16 @@ class PokeClient:
 
         logger.debug(f"Formatting pokemon data into object")
         return Pokemon(**response.json())
+
+    @staticmethod
+    def _is_valid_id(provided_id: Union[str, int]) -> bool:
+        """
+        Returns the validity of the provided ID for use in PokeAPI: should be integer or string.
+
+        Args:
+            provided_id (Union[str, int]): the identifier to use in a query.
+
+        Returns:
+            True if the types are acceptable, False otherwise.
+        """
+        return isinstance(provided_id, str) or isinstance(provided_id, int)
