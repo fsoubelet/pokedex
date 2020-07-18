@@ -76,6 +76,7 @@ class Move(BaseModel):
     moves (including those learned by Hidden Machine) can be used outside of battle as well,
     usually for the purpose of removing obstacles or exploring new areas.
     """
+
     id: int
     name: str
     accuracy: int
@@ -103,6 +104,7 @@ class Move(BaseModel):
 
 class MoveAilment(BaseModel):
     """Move Ailments are status conditions caused by moves used during battle."""
+
     id: int
     name: str
     moves: List[NamedAPIResource]
@@ -111,6 +113,7 @@ class MoveAilment(BaseModel):
 
 class MoveBattleStyle(BaseModel):
     """Styles of moves when used in the Battle Palace."""
+
     id: int
     name: str
     names: List[Name]
@@ -118,6 +121,7 @@ class MoveBattleStyle(BaseModel):
 
 class ModelName(BaseModel):
     """Very general categories that loosely group move effects."""
+
     id: int
     name: str
     moves: List[NamedAPIResource]
@@ -126,6 +130,7 @@ class ModelName(BaseModel):
 
 class MoveDamageClass(BaseModel):
     """Damage classes moves can have, e.g. physical, special, or non-damaging."""
+
     id: int
     name: str
     descriptions: List[Description]
@@ -135,6 +140,7 @@ class MoveDamageClass(BaseModel):
 
 class MoveLearnMethod(BaseModel):
     """Methods by which Pokémon can learn moves."""
+
     id: int
     name: str
     descriptions: List[Description]
@@ -147,6 +153,7 @@ class MoveTarget(BaseModel):
     Targets moves can be directed at during battle. Targets can be Pokémon, environments or even
     other moves.
     """
+
     id: int
     name: str
     descriptions: List[Description]

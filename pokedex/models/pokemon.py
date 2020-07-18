@@ -57,6 +57,7 @@ class Ability(BaseModel):
     Abilities provide passive effects for Pokémon in battle or in the overworld. Pokémon have
     multiple possible abilities but can have only one ability at a time.
     """
+
     id: int
     name: str
     is_main_series: bool
@@ -73,6 +74,7 @@ class Characteristic(BaseModel):
     Characteristics indicate which stat contains a Pokémon's highest IV. A Pokémon's
     Characteristic is determined by the remainder of its highest IV divided by 5 (gene_modulo).
     """
+
     id: int
     gene_modulo: int
     possible_values: List[int]
@@ -83,6 +85,7 @@ class EggGroup(BaseModel):
     Egg Groups are categories which determine which Pokémon are able to interbreed. Pokémon may
     belong to either one or two Egg Groups.
     """
+
     id: int
     name: str
     names: List[Name]
@@ -99,6 +102,7 @@ class Gender(BaseModel):
     Genders were introduced in Generation II for the purposes of breeding Pokémon but can also
     result in visual differences or even different evolutionary lines.
     """
+
     id: int
     name: str
     pokemon_species_details: List[PokemonSpeciesGender]
@@ -112,6 +116,7 @@ class GrowthRateExperienceLevel(BaseModel):
 
 class GrowthRate(BaseModel):
     """Growth rates are the speed with which Pokémon gain levels through experience."""
+
     id: int
     name: str
     formula: str
@@ -133,6 +138,7 @@ class MoveBattleStylePreference(BaseModel):
 
 class Nature(BaseModel):
     """Natures influence how a Pokémon's stats grow."""
+
     id: int
     name: str
     decreased_stat: NamedAPIResource
@@ -160,6 +166,7 @@ class PokeathlonStat(BaseModel):
     Pokéathlons, competitions happen on different courses; one for each of the different
     Pokéathlon stats.
     """
+
     id: int
     name: str
     names: List[Name]
@@ -222,6 +229,7 @@ class Pokemon(BaseModel):
     specific species but may take on a variant which makes it differ from other Pokémon of the
     same species, such as base stats, available abilities and typings.
     """
+
     id: int
     name: str
     base_experience: int
@@ -252,6 +260,7 @@ class PokemonColor(BaseModel):
     color most apparent or covering each Pokémon's body. No orange category exists; Pokémon that
     are primarily orange are listed as red or brown.
     """
+
     id: int
     name: str
     names: List[Name]
@@ -271,6 +280,7 @@ class PokemonForm(BaseModel):
     purely cosmetic. For variations within a Pokémon species, which do differ in more than just
     visuals, the 'Pokémon' entity is used to represent such a variety.
     """
+
     id: int
     name: str
     order: int
@@ -291,6 +301,7 @@ class PokemonHabitat(BaseModel):
     Habitats are generally different terrain Pokémon can be found in but can also be areas
     designated for rare or legendary Pokémon.
     """
+
     id: int
     name: str
     names: List[Name]
@@ -304,6 +315,7 @@ class AwesomeName(BaseModel):
 
 class PokemonShape(BaseModel):
     """Shapes used for sorting Pokémon in a Pokédex."""
+
     id: int
     name: str
     awesome_names: List[AwesomeName]
@@ -339,6 +351,7 @@ class PokemonSpecies(BaseModel):
     Wormadam is the species which can be found in three different varieties, Wormadam-Trash,
     Wormadam-Sandy and Wormadam-Plant.
     """
+
     id: int
     name: str
     order: int
@@ -386,6 +399,7 @@ class Stat(BaseModel):
     Stats determine certain aspects of battles. Each Pokémon has a value for each stat which
     grows as they gain levels and can be altered momentarily by effects in battles.
     """
+
     id: int
     name: str
     game_index: int
@@ -417,6 +431,7 @@ class Type(BaseModel):
     of Pokémon it is super effective against, which types of Pokémon it is not very effective
     against, and which types of Pokémon it is completely ineffective against.
     """
+
     id: int
     name: str
     damage_relations: TypeRelations

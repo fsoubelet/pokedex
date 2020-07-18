@@ -22,6 +22,7 @@ class ContestType(BaseModel):
     """
     Contest types are categories judges used to weigh a Pokémon's condition in Pokémon contests.
     """
+
     id: int
     name: str
     berry_flavor: NamedAPIResource
@@ -30,6 +31,7 @@ class ContestType(BaseModel):
 
 class ContestEffect(BaseModel):
     """Contest effects refer to the effects of moves when used in contests."""
+
     id: int
     appeal: int
     jam: int
@@ -39,6 +41,7 @@ class ContestEffect(BaseModel):
 
 class SuperContestEffect(BaseModel):
     """Super contest effects refer to the effects of moves when used in super contests."""
+
     id: int
     appeal: int
     flavor_text_entries: List[FlavorText]

@@ -19,6 +19,7 @@ class Name(BaseModel):
 
 class Language(BaseModel):
     """Languages for translations of API resource information."""
+
     id: int
     name: str
     official: bool

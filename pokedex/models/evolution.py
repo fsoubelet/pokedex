@@ -45,6 +45,7 @@ class EvolutionChain(BaseModel):
     family and detail evolution conditions for each as well as Pokémon they can evolve into up
     through the hierarchy.
     """
+
     id: int
     baby_trigger_item: NamedAPIResource
     chain: ChainLink
@@ -52,6 +53,7 @@ class EvolutionChain(BaseModel):
 
 class EvolutionTrigger(BaseModel):
     """Evolution triggers are the events and conditions that cause a Pokémon to evolve."""
+
     id: int
     name: str
     names: List[Name]

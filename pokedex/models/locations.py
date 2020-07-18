@@ -23,6 +23,7 @@ class Location(BaseModel):
     Locations that can be visited within the games. Locations make up sizable portions of
     regions, like cities or routes.
     """
+
     id: int
     name: str
     region: NamedAPIResource
@@ -51,6 +52,7 @@ class LocationArea(BaseModel):
     Location areas are sections of areas, such as floors in a building or cave. Each area has its
     own set of possible Pokémon encounters.
     """
+
     id: int
     name: str
     game_index: int
@@ -71,6 +73,7 @@ class PalParkArea(BaseModel):
     Areas used for grouping Pokémon encounters in Pal Park. They're like habitats that are
     specific to Pal Park.
     """
+
     id: int
     name: str
     names: List[Name]
@@ -82,6 +85,7 @@ class Region(BaseModel):
     A region is an organized area of the Pokémon world. Most often, the main difference between
     regions is the species of Pokémon that can be encountered within them.
     """
+
     id: int
     locations: List[NamedAPIResource]
     name: str

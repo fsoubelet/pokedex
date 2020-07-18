@@ -44,6 +44,7 @@ class Item(BaseModel):
     some manner. They have various uses, including healing, powering up, helping catch Pokémon,
     or to access a new area.
     """
+
     id: int
     name: str
     cost: int
@@ -65,6 +66,7 @@ class ItemAttribute(BaseModel):
     """
     Item attributes define particular aspects of items, e.g. "usable in battle" or "consumable".
     """
+
     id: int
     name: str
     items: List[NamedAPIResource]
@@ -74,6 +76,7 @@ class ItemAttribute(BaseModel):
 
 class ItemCategory(BaseModel):
     """Item categories determine where items will be placed in the players bag."""
+
     id: int
     name: str
     items: List[NamedAPIResource]
@@ -83,6 +86,7 @@ class ItemCategory(BaseModel):
 
 class ItemFlingEffect(BaseModel):
     """The various effects of the move "Fling" when used with different items."""
+
     id: int
     name: str
     effect_entries: List[Effect]
@@ -91,6 +95,7 @@ class ItemFlingEffect(BaseModel):
 
 class ItemPocket(BaseModel):
     """Pockets within the players bag used for storing items by category."""
+
     id: int
     name: str
     categories: List[NamedAPIResource]

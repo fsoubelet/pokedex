@@ -22,6 +22,7 @@ class Berry(BaseModel):
     Berries are small fruits that can provide HP and status condition restoration,
     stat enhancement, and even damage negation when eaten by Pokémon.
     """
+
     id: int
     name: str
     growth_time: int
@@ -38,6 +39,7 @@ class Berry(BaseModel):
 
 class BerryFirmness(BaseModel):
     """Berries can be soft or hard."""
+
     id: int
     name: str
     berries: List[NamedAPIResource]
@@ -54,6 +56,7 @@ class BerryFlavor(BaseModel):
     Flavors determine whether a Pokémon will benefit or suffer from eating a berry based on their
     nature.
     """
+
     id: int
     name: str
     berries: List[FlavorBerryMap]

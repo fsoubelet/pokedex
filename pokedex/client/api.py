@@ -5,6 +5,7 @@ from loguru import logger
 
 from pokedex.models.pokemon import Pokemon
 
+
 class PokeClient:
     def __init__(self):
         self.base_url: str = "https://pokeapi.co/api/v2/"
