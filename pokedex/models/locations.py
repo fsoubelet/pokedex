@@ -1,3 +1,11 @@
+"""
+Model classes for the 'Locations' endpoint objects. Available endpoints are:
+- Locations (https://pokeapi.co/api/v2/location/{id or name}/)
+- Location Areas (https://pokeapi.co/api/v2/location-area/{id or name}/)
+- Pal Park Areas (https://pokeapi.co/api/v2/pal-park-area/{id or name}/)
+- Regions (https://pokeapi.co/api/v2/region/{id or name}/)
+"""
+
 from typing import List
 
 from pydantic import BaseModel
@@ -11,6 +19,10 @@ from pokedex.models.commons import (
 
 
 class Location(BaseModel):
+    """
+    Locations that can be visited within the games. Locations make up sizable portions of
+    regions, like cities or routes.
+    """
     id: int
     name: str
     region: NamedAPIResource
@@ -35,6 +47,10 @@ class PokemonEncounter(BaseModel):
 
 
 class LocationArea(BaseModel):
+    """
+    Location areas are sections of areas, such as floors in a building or cave. Each area has its
+    own set of possible Pokémon encounters.
+    """
     id: int
     name: str
     game_index: int
@@ -51,6 +67,10 @@ class PalParkEncounterSpecies(BaseModel):
 
 
 class PalParkArea(BaseModel):
+    """
+    Areas used for grouping Pokémon encounters in Pal Park. They're like habitats that are
+    specific to Pal Park.
+    """
     id: int
     name: str
     names: List[Name]
@@ -58,6 +78,10 @@ class PalParkArea(BaseModel):
 
 
 class Region(BaseModel):
+    """
+    A region is an organized area of the Pokémon world. Most often, the main difference between
+    regions is the species of Pokémon that can be encountered within them.
+    """
     id: int
     locations: List[NamedAPIResource]
     name: str

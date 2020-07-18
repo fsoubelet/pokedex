@@ -1,3 +1,9 @@
+"""
+Model classes for the 'Evolution' endpoint objects. Available endpoints are:
+- Evolution Chains (https://pokeapi.co/api/v2/evolution-chain/{id}/)
+- Evolution Triggers (https://pokeapi.co/api/v2/evolution-trigger/{id or name}/)
+"""
+
 from typing import List
 
 from pydantic import BaseModel
@@ -34,12 +40,18 @@ class ChainLink(BaseModel):
 
 
 class EvolutionChain(BaseModel):
+    """
+    Evolution chains are essentially family trees. They start with the lowest stage within a
+    family and detail evolution conditions for each as well as Pokémon they can evolve into up
+    through the hierarchy.
+    """
     id: int
     baby_trigger_item: NamedAPIResource
     chain: ChainLink
 
 
 class EvolutionTrigger(BaseModel):
+    """Evolution triggers are the events and conditions that cause a Pokémon to evolve."""
     id: int
     name: str
     names: List[Name]

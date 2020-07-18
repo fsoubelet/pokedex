@@ -1,3 +1,7 @@
+"""
+Model classes for the 'Utility' objects.
+"""
+
 from typing import List
 
 from pydantic import BaseModel
@@ -14,6 +18,7 @@ class Name(BaseModel):
 
 
 class Language(BaseModel):
+    """Languages for translations of API resource information."""
     id: int
     name: str
     official: bool

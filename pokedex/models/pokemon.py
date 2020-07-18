@@ -1,3 +1,22 @@
+"""
+Model classes for the 'Pokémon' endpoint objects. Available endpoints are:
+- Abilities (https://pokeapi.co/api/v2/ability/{id or name}/)
+- Characteristics (https://pokeapi.co/api/v2/characteristic/{id}/)
+- Egg Groups (https://pokeapi.co/api/v2/egg-group/{id or name}/)
+- Genders (https://pokeapi.co/api/v2/gender/{id or name}/)
+- Growth Rates (https://pokeapi.co/api/v2/growth-rate/{id or name}/)
+- Natures (https://pokeapi.co/api/v2/nature/{id or name}/)
+- Pokeathlon Stats (https://pokeapi.co/api/v2/pokeathlon-stat/{id or name}/)
+- Pokemon (https://pokeapi.co/api/v2/pokemon/{id or name}/)
+- Pokemon Colors (https://pokeapi.co/api/v2/pokemon-color/{id or name}/)
+- Pokemon Forms (https://pokeapi.co/api/v2/pokemon-form/{id or name}/)
+- Pokemon Habitats (https://pokeapi.co/api/v2/pokemon-habitat/{id or name}/)
+- Pokemon Shapes (https://pokeapi.co/api/v2/pokemon-shape/{id or name}/)
+- Pokemon Species (https://pokeapi.co/api/v2/pokemon-species/{id or name}/)
+- Stats (https://pokeapi.co/api/v2/stat/{id or name}/)
+- Types (https://pokeapi.co/api/v2/type/{id or name}/)
+"""
+
 from typing import List, Optional
 
 from pydantic import BaseModel
@@ -34,6 +53,10 @@ class AbilityPokemon(BaseModel):
 
 
 class Ability(BaseModel):
+    """
+    Abilities provide passive effects for Pokémon in battle or in the overworld. Pokémon have
+    multiple possible abilities but can have only one ability at a time.
+    """
     id: int
     name: str
     is_main_series: bool
@@ -46,12 +69,20 @@ class Ability(BaseModel):
 
 
 class Characteristic(BaseModel):
+    """
+    Characteristics indicate which stat contains a Pokémon's highest IV. A Pokémon's
+    Characteristic is determined by the remainder of its highest IV divided by 5 (gene_modulo).
+    """
     id: int
     gene_modulo: int
     possible_values: List[int]
 
 
 class EggGroup(BaseModel):
+    """
+    Egg Groups are categories which determine which Pokémon are able to interbreed. Pokémon may
+    belong to either one or two Egg Groups.
+    """
     id: int
     name: str
     names: List[Name]
@@ -64,6 +95,10 @@ class PokemonSpeciesGender(BaseModel):
 
 
 class Gender(BaseModel):
+    """
+    Genders were introduced in Generation II for the purposes of breeding Pokémon but can also
+    result in visual differences or even different evolutionary lines.
+    """
     id: int
     name: str
     pokemon_species_details: List[PokemonSpeciesGender]
@@ -76,6 +111,7 @@ class GrowthRateExperienceLevel(BaseModel):
 
 
 class GrowthRate(BaseModel):
+    """Growth rates are the speed with which Pokémon gain levels through experience."""
     id: int
     name: str
     formula: str
@@ -96,6 +132,7 @@ class MoveBattleStylePreference(BaseModel):
 
 
 class Nature(BaseModel):
+    """Natures influence how a Pokémon's stats grow."""
     id: int
     name: str
     decreased_stat: NamedAPIResource
@@ -118,6 +155,11 @@ class NaturePokeathlonStatAffectSets(BaseModel):
 
 
 class PokeathlonStat(BaseModel):
+    """
+    Pokeathlon Stats are different attributes of a Pokémon's performance in Pokéathlons. In
+    Pokéathlons, competitions happen on different courses; one for each of the different
+    Pokéathlon stats.
+    """
     id: int
     name: str
     names: List[Name]
@@ -174,6 +216,12 @@ class PokemonStat(BaseModel):
 
 
 class Pokemon(BaseModel):
+    """
+    Pokémon are the creatures that inhabit the world of the Pokémon games. They can be caught
+    using Pokéballs and trained by battling with other Pokémon. Each Pokémon belongs to a
+    specific species but may take on a variant which makes it differ from other Pokémon of the
+    same species, such as base stats, available abilities and typings.
+    """
     id: int
     name: str
     base_experience: int
@@ -199,6 +247,11 @@ class LocationAreaEncounter(BaseModel):
 
 
 class PokemonColor(BaseModel):
+    """
+    Colors used for sorting Pokémon in a Pokédex. The color listed in the Pokédex is usually the
+    color most apparent or covering each Pokémon's body. No orange category exists; Pokémon that
+    are primarily orange are listed as red or brown.
+    """
     id: int
     name: str
     names: List[Name]
@@ -213,6 +266,11 @@ class PokemonFormSprites(BaseModel):
 
 
 class PokemonForm(BaseModel):
+    """
+    Some Pokémon may appear in one of multiple, visually different forms. These differences are
+    purely cosmetic. For variations within a Pokémon species, which do differ in more than just
+    visuals, the 'Pokémon' entity is used to represent such a variety.
+    """
     id: int
     name: str
     order: int
@@ -229,6 +287,10 @@ class PokemonForm(BaseModel):
 
 
 class PokemonHabitat(BaseModel):
+    """
+    Habitats are generally different terrain Pokémon can be found in but can also be areas
+    designated for rare or legendary Pokémon.
+    """
     id: int
     name: str
     names: List[Name]
@@ -241,6 +303,7 @@ class AwesomeName(BaseModel):
 
 
 class PokemonShape(BaseModel):
+    """Shapes used for sorting Pokémon in a Pokédex."""
     id: int
     name: str
     awesome_names: List[AwesomeName]
@@ -270,6 +333,12 @@ class PokemonSpeciesVariety(BaseModel):
 
 
 class PokemonSpecies(BaseModel):
+    """
+    A Pokémon Species forms the basis for at least one Pokémon. Attributes of a Pokémon species
+    are shared across all varieties of Pokémon within the species. A good example is Wormadam;
+    Wormadam is the species which can be found in three different varieties, Wormadam-Trash,
+    Wormadam-Sandy and Wormadam-Plant.
+    """
     id: int
     name: str
     order: int
@@ -313,6 +382,10 @@ class NatureStatAffectSets(BaseModel):
 
 
 class Stat(BaseModel):
+    """
+    Stats determine certain aspects of battles. Each Pokémon has a value for each stat which
+    grows as they gain levels and can be altered momentarily by effects in battles.
+    """
     id: int
     name: str
     game_index: int
@@ -339,6 +412,11 @@ class TypePokemon(BaseModel):
 
 
 class Type(BaseModel):
+    """
+    Types are properties for Pokémon and their moves. Each type has three properties: which types
+    of Pokémon it is super effective against, which types of Pokémon it is not very effective
+    against, and which types of Pokémon it is completely ineffective against.
+    """
     id: int
     name: str
     damage_relations: TypeRelations

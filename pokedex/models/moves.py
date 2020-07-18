@@ -1,3 +1,14 @@
+"""
+Model classes for the 'Moves' endpoint objects. Available endpoints are:
+- Moves (https://pokeapi.co/api/v2/move/{id or name}/)
+- Move Ailments (https://pokeapi.co/api/v2/move-ailment/{id or name}/)
+- Move Battle Styles (https://pokeapi.co/api/v2/move-battle-style/{id or name}/)
+- Move Categories (https://pokeapi.co/api/v2/move-category/{id or name}/)
+- Move Damage Classes (https://pokeapi.co/api/v2/move-damage-class/{id or name}/)
+- Move Learn Methods (https://pokeapi.co/api/v2/move-learn-method/{id or name}/)
+- Move Targets (https://pokeapi.co/api/v2/move-target/{id or name}/)
+"""
+
 from typing import List
 
 from pydantic import BaseModel
@@ -60,6 +71,11 @@ class MoveStatChange(BaseModel):
 
 
 class Move(BaseModel):
+    """
+    Moves are the skills of Pokémon in battle. In battle, a Pokémon uses one move each turn. Some
+    moves (including those learned by Hidden Machine) can be used outside of battle as well,
+    usually for the purpose of removing obstacles or exploring new areas.
+    """
     id: int
     name: str
     accuracy: int
@@ -86,6 +102,7 @@ class Move(BaseModel):
 
 
 class MoveAilment(BaseModel):
+    """Move Ailments are status conditions caused by moves used during battle."""
     id: int
     name: str
     moves: List[NamedAPIResource]
@@ -93,12 +110,14 @@ class MoveAilment(BaseModel):
 
 
 class MoveBattleStyle(BaseModel):
+    """Styles of moves when used in the Battle Palace."""
     id: int
     name: str
     names: List[Name]
 
 
 class ModelName(BaseModel):
+    """Very general categories that loosely group move effects."""
     id: int
     name: str
     moves: List[NamedAPIResource]
@@ -106,6 +125,7 @@ class ModelName(BaseModel):
 
 
 class MoveDamageClass(BaseModel):
+    """Damage classes moves can have, e.g. physical, special, or non-damaging."""
     id: int
     name: str
     descriptions: List[Description]
@@ -114,6 +134,7 @@ class MoveDamageClass(BaseModel):
 
 
 class MoveLearnMethod(BaseModel):
+    """Methods by which Pokémon can learn moves."""
     id: int
     name: str
     descriptions: List[Description]
@@ -122,6 +143,10 @@ class MoveLearnMethod(BaseModel):
 
 
 class MoveTarget(BaseModel):
+    """
+    Targets moves can be directed at during battle. Targets can be Pokémon, environments or even
+    other moves.
+    """
     id: int
     name: str
     descriptions: List[Description]
