@@ -1,4 +1,5 @@
-from typing import Dict, List, Union
+import functools
+from typing import Union
 
 import requests
 from loguru import logger
@@ -24,6 +25,7 @@ class PokeClient:
         logger.trace(f"Formatting query url for item_id '{item_id}'")
         return f"{self.base_url}/{item_type}/{item_id}/"
 
+    @functools.lru_cache()
     def get_pokemon(self, pokemon_id: Union[str, int]) -> Pokemon:
         """
         Query a pokemon's data and return it organised in a Pokemon object.
@@ -43,7 +45,7 @@ class PokeClient:
 
         pokemon_query_url: str = self.format_query_url(item_id=pokemon_id, item_type="pokemon")
 
-        logger.debug(f"Sending GET request for data for pokemon '{pokemon_id}'")
+        logger.debug(f"Sending GET request for data for pokemon with ID '{pokemon_id}'")
         response: requests.Response = requests.get(pokemon_query_url)
 
         if response.status_code != 200:

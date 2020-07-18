@@ -4,7 +4,7 @@ Model classes for the 'Evolution' endpoint objects. Available endpoints are:
 - Evolution Triggers (https://pokeapi.co/api/v2/evolution-trigger/{id or name}/)
 """
 
-from typing import List, Dict
+from typing import Dict, List
 
 from pydantic import BaseModel
 
