@@ -1,10 +1,6 @@
+from typing import Dict, List
+
 from pydantic import BaseModel
-from typing import List
-
-
-class Name(BaseModel):
-    name: str
-    language: Language
 
 
 class Language(BaseModel):
@@ -13,4 +9,9 @@ class Language(BaseModel):
     official: bool
     iso639: str
     iso3166: str
-    names: List[Name]
+    names: List[Dict]
+
+
+class Name(BaseModel):
+    name: str
+    language: Language

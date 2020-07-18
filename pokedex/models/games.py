@@ -2,22 +2,22 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models.basics import Name
-from pokedex.models.commons import Description
-from pokedex.models.locations import Region
-from pokedex.models.moves import Move, MoveLearnMethod
-from pokedex.models.pokemon import Ability, PokemonSpecies, Type
+from pokedex.models import basics
+from pokedex.models import commons
+from pokedex.models import locations
+from pokedex.models import moves
+from pokedex.models import pokemon
 
 
 class Generation(BaseModel):
     id: int
     name: str
-    abilities: List[Ability]
-    names: List[Name]
-    main_region: Region
-    moves: List[Move]
-    pokemon_species: List[PokemonSpecies]
-    types: List[Type]
+    abilities: List[pokemon.Ability]
+    names: List[basics.Name]
+    main_region: locations.Region
+    moves: List[moves.Move]
+    pokemon_species: List[pokemon.PokemonSpecies]
+    types: List[pokemon.Type]
     version_groups: List[VersionGroup]
 
 
@@ -25,22 +25,22 @@ class Pokedex(BaseModel):
     id: int
     name: str
     is_main_series: bool
-    descriptions: List[Description]
-    names: List[Name]
+    descriptions: List[commons.Description]
+    names: List[basics.Name]
     pokemon_entries: List[PokemonEntry]
-    region: Region
+    region: locations.Region
     version_groups: List[VersionGroup]
 
 
 class PokemonEntry(BaseModel):
     entry_number: int
-    pokemon_species: PokemonSpecies
+    pokemon_species: pokemon.PokemonSpecies
 
 
 class Version(BaseModel):
     id: int
     name: str
-    names: List[Name]
+    names: List[basics.Name]
     version_group: VersionGroup
 
 
@@ -49,7 +49,7 @@ class VersionGroup(BaseModel):
     name: str
     order: int
     generation: Generation
-    move_learn_methods: List[MoveLearnMethod]
+    move_learn_methods: List[moves.MoveLearnMethod]
     pokedexes: List[Pokedex]
-    regions: List[Region]
+    regions: List[locations.Region]
     versions: List[Version]

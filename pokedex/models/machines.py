@@ -1,12 +1,12 @@
 from pydantic import BaseModel
 
-from pokedex.models.games import VersionGroup
-from pokedex.models.items import Item
-from pokedex.models.moves import Move
+from pokedex.models import games
+from pokedex.models import items
+from pokedex.models import moves
 
 
 class Machine(BaseModel):
     id: int
-    item: Item
-    move: Move
-    version_group: VersionGroup
+    item: items.Item
+    move: moves.Move
+    version_group: games.VersionGroup

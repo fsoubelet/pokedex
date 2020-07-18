@@ -2,11 +2,11 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models.basics import Language, Name
-from pokedex.models.commons import Description, MachineVersionDetail, VerboseEffect
-from pokedex.models.contests import ContestEffect, ContestType, SuperContestEffect
-from pokedex.models.games import Generation, VersionGroup
-from pokedex.models.pokemon import AbilityEffectChange, Stat, Type
+from pokedex.models import basics
+from pokedex.models import commons
+from pokedex.models import contests
+from pokedex.models import games
+from pokedex.models import pokemon
 
 
 class Move(BaseModel):
@@ -18,21 +18,21 @@ class Move(BaseModel):
     priority: int
     power: int
     contest_combos: ContestComboSets
-    contest_type: ContestType
-    contest_effect: ContestEffect
+    contest_type: contests.ContestType
+    contest_effect: contests.ContestEffect
     damage_class: MoveDamageClass
-    effect_entries: List[VerboseEffect]
-    effect_changes: List[AbilityEffectChange]
+    effect_entries: List[commons.VerboseEffect]
+    effect_changes: List[pokemon.AbilityEffectChange]
     flavor_text_entries: List[MoveFlavorText]
-    generation: Generation
-    machines: List[MachineVersionDetail]
+    generation: games.Generation
+    machines: List[commons.MachineVersionDetail]
     meta: MoveMetaData
-    names: List[Name]
+    names: List[basics.Name]
     past_values: List[PastMoveStatValues]
     stat_changes: List[MoveStatChange]
-    super_contest_effect: SuperContestEffect
+    super_contest_effect: contests.SuperContestEffect
     target: MoveTarget
-    type: Type
+    type: pokemon.Type
 
 
 class ContestComboSets(BaseModel):
@@ -47,8 +47,8 @@ class ContestComboDetail(BaseModel):
 
 class MoveFlavorText(BaseModel):
     flavor_text: str
-    language: Language
-    version_group: VersionGroup
+    language: basics.Language
+    version_group: games.VersionGroup
 
 
 class MoveMetaData(BaseModel):
@@ -68,7 +68,7 @@ class MoveMetaData(BaseModel):
 
 class MoveStatChange(BaseModel):
     change: int
-    stat: Stat
+    stat: pokemon.Stat
 
 
 class PastMoveStatValues(BaseModel):
@@ -76,50 +76,50 @@ class PastMoveStatValues(BaseModel):
     effect_chance: int
     power: int
     pp: int
-    effect_entries: List[VerboseEffect]
-    type: Type
-    version_group: VersionGroup
+    effect_entries: List[commons.VerboseEffect]
+    type: pokemon.Type
+    version_group: games.VersionGroup
 
 
 class MoveAilment(BaseModel):
     id: int
     name: str
     moves: List[Move]
-    names: List[Name]
+    names: List[basics.Name]
 
 
 class MoveBattleStyle(BaseModel):
     id: int
     name: str
-    names: List[Name]
+    names: List[basics.Name]
 
 
 class ModelName(BaseModel):
     id: int
     name: str
     moves: List[Move]
-    descriptions: List[Description]
+    descriptions: List[commons.Description]
 
 
 class MoveDamageClass(BaseModel):
     id: int
     name: str
-    descriptions: List[Description]
+    descriptions: List[commons.Description]
     moves: List[Move]
-    names: List[Name]
+    names: List[basics.Name]
 
 
 class MoveLearnMethod(BaseModel):
     id: int
     name: str
-    descriptions: List[Description]
-    names: List[Name]
-    version_groups: List[VersionGroup]
+    descriptions: List[commons.Description]
+    names: List[basics.Name]
+    version_groups: List[games.VersionGroup]
 
 
 class MoveTarget(BaseModel):
     id: int
     name: str
-    descriptions: List[Description]
+    descriptions: List[commons.Description]
     moves: List[Move]
-    names: List[Name]
+    names: List[basics.Name]

@@ -2,45 +2,37 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models.basics import Language, Name
-from pokedex.models.berries import BerryFlavor
-from pokedex.models.commons import (
-    Description,
-    Effect,
-    FlavorText,
-    GenerationGameIndex,
-    VerboseEffect,
-    VersionEncounterDetail,
-    VersionGameIndex,
-)
-from pokedex.models.evolution import EvolutionChain
-from pokedex.models.games import Generation, Pokedex, Version, VersionGroup
-from pokedex.models.items import Item
-from pokedex.models.locations import LocationArea, PalParkArea
-from pokedex.models.moves import Move, MoveBattleStyle, MoveDamageClass, MoveLearnMethod
+from pokedex.models import basics
+from pokedex.models import berries
+from pokedex.models import commons
+from pokedex.models import evolution
+from pokedex.models import games
+from pokedex.models import items
+from pokedex.models import locations
+from pokedex.models import moves
 
 
 class Ability(BaseModel):
     id: int
     name: str
     is_main_series: bool
-    generation: Generation
-    names: List[Name]
-    effect_entries: List[VerboseEffect]
+    generation: games.Generation
+    names: List[basics.Name]
+    effect_entries: List[commons.VerboseEffect]
     effect_changes: List[AbilityEffectChange]
     flavor_text_entries: List[AbilityFlavorText]
     pokemon: List[AbilityPokemon]
 
 
 class AbilityEffectChange(BaseModel):
-    effect_entries: List[Effect]
-    version_group: VersionGroup
+    effect_entries: List[commons.Effect]
+    version_group: games.VersionGroup
 
 
 class AbilityFlavorText(BaseModel):
     flavor_text: str
-    language: Language
-    version_group: VersionGroup
+    language: basics.Language
+    version_group: games.VersionGroup
 
 
 class AbilityPokemon(BaseModel):
@@ -58,7 +50,7 @@ class Characteristic(BaseModel):
 class EggGroup(BaseModel):
     id: int
     name: str
-    names: List[Name]
+    names: List[basics.Name]
     pokemon_species: List[PokemonSpecies]
 
 
@@ -78,7 +70,7 @@ class GrowthRate(BaseModel):
     id: int
     name: str
     formula: str
-    descriptions: List[Description]
+    descriptions: List[commons.Description]
     levels: List[GrowthRateExperienceLevel]
     pokemon_species: List[PokemonSpecies]
 
@@ -93,11 +85,11 @@ class Nature(BaseModel):
     name: str
     decreased_stat: Stat
     increased_stat: Stat
-    hates_flavor: BerryFlavor
-    likes_flavor: BerryFlavor
+    hates_flavor: berries.BerryFlavor
+    likes_flavor: berries.BerryFlavor
     pokeathlon_stat_changes: List[NatureStatChange]
     move_battle_style_preferences: List[MoveBattleStylePreference]
-    names: List[Name]
+    names: List[basics.Name]
 
 
 class NatureStatChange(BaseModel):
@@ -108,13 +100,13 @@ class NatureStatChange(BaseModel):
 class MoveBattleStylePreference(BaseModel):
     low_hp_preference: int
     high_hp_preference: int
-    move_battle_style: MoveBattleStyle
+    move_battle_style: moves.MoveBattleStyle
 
 
 class PokeathlonStat(BaseModel):
     id: int
     name: str
-    names: List[Name]
+    names: List[basics.Name]
     affecting_natures: NaturePokeathlonStatAffectSets
 
 
@@ -138,7 +130,7 @@ class Pokemon(BaseModel):
     weight: int
     abilities: List[PokemonAbility]
     forms: List[PokemonForm]
-    game_indices: List[VersionGameIndex]
+    game_indices: List[commons.VersionGameIndex]
     held_items: List[PokemonHeldItem]
     location_area_encounters: str
     moves: List[PokemonMove]
@@ -160,23 +152,23 @@ class PokemonType(BaseModel):
 
 
 class PokemonHeldItem(BaseModel):
-    item: Item
+    item: items.Item
     version_details: List[PokemonHeldItemVersion]
 
 
 class PokemonHeldItemVersion(BaseModel):
-    version: Version
+    version: games.Version
     rarity: int
 
 
 class PokemonMove(BaseModel):
-    move: Move
+    move: moves.Move
     version_group_details: List[PokemonMoveVersion]
 
 
 class PokemonMoveVersion(BaseModel):
-    move_learn_method: MoveLearnMethod
-    version_group: VersionGroup
+    move_learn_method: moves.MoveLearnMethod
+    version_group: games.VersionGroup
     level_learned_at: int
 
 
@@ -198,14 +190,14 @@ class PokemonSprites(BaseModel):
 
 
 class LocationAreaEncounter(BaseModel):
-    location_area: LocationArea
-    version_details: VersionEncounterDetail
+    location_area: locations.LocationArea
+    version_details: commons.VersionEncounterDetail
 
 
 class PokemonColor(BaseModel):
     id: int
     name: str
-    names: List[Name]
+    names: List[basics.Name]
     pokemon_species: List[PokemonSpecies]
 
 
@@ -220,9 +212,9 @@ class PokemonForm(BaseModel):
     form_name: str
     pokemon: Pokemon
     sprites: PokemonFormSprites
-    version_group: VersionGroup
-    names: List[Name]
-    form_names: List[Name]
+    version_group: games.VersionGroup
+    names: List[basics.Name]
+    form_names: List[basics.Name]
 
 
 class PokemonFormSprites(BaseModel):
@@ -235,7 +227,7 @@ class PokemonFormSprites(BaseModel):
 class PokemonHabitat(BaseModel):
     id: int
     name: str
-    names: List[Name]
+    names: List[basics.Name]
     pokemon_species: List[PokemonSpecies]
 
 
@@ -243,13 +235,13 @@ class PokemonShape(BaseModel):
     id: int
     name: str
     awesome_names: List[AwesomeName]
-    names: List[Name]
+    names: List[basics.Name]
     pokemon_species: List[PokemonSpecies]
 
 
 class AwesomeName(BaseModel):
     awesome_name: str
-    language: Language
+    language: basics.Language
 
 
 class PokemonSpecies(BaseModel):
@@ -269,31 +261,31 @@ class PokemonSpecies(BaseModel):
     color: PokemonColor
     shape: PokemonShape
     evolves_from_species: PokemonSpecies
-    evolution_chain: EvolutionChain
+    evolution_chain: evolution.EvolutionChain
     habitat: PokemonHabitat
-    generation: Generation
-    names: List[Name]
+    generation: games.Generation
+    names: List[basics.Name]
     pal_park_encounters: List[PalParkEncounterArea]
-    flavor_text_entries: List[FlavorText]
-    form_descriptions: List[Description]
+    flavor_text_entries: List[commons.FlavorText]
+    form_descriptions: List[commons.Description]
     genera: List[Genus]
     varieties: List[PokemonSpeciesVariety]
 
 
 class Genus(BaseModel):
     genus: str
-    language: Language
+    language: basics.Language
 
 
 class PokemonSpeciesDexEntry(BaseModel):
     entry_number: int
-    pokedex: Pokedex
+    pokedex: games.Pokedex
 
 
 class PalParkEncounterArea(BaseModel):
     base_score: int
     rate: int
-    area: PalParkArea
+    area: locations.PalParkArea
 
 
 class PokemonSpeciesVariety(BaseModel):
@@ -309,8 +301,8 @@ class Stat(BaseModel):
     affecting_moves: MoveStatAffectSets
     affecting_natures: NatureStatAffectSets
     characteristics: List[Characteristic]
-    move_damage_class: MoveDamageClass
-    names: List[Name]
+    move_damage_class: moves.MoveDamageClass
+    names: List[basics.Name]
 
 
 class MoveStatAffectSets(BaseModel):
@@ -320,7 +312,7 @@ class MoveStatAffectSets(BaseModel):
 
 class MoveStatAffect(BaseModel):
     change: int
-    move: Move
+    move: moves.Move
 
 
 class NatureStatAffectSets(BaseModel):
@@ -332,12 +324,12 @@ class Type(BaseModel):
     id: int
     name: str
     damage_relations: TypeRelations
-    game_indices: List[GenerationGameIndex]
-    generation: Generation
-    move_damage_class: MoveDamageClass
-    names: List[Name]
+    game_indices: List[commons.GenerationGameIndex]
+    generation: games.Generation
+    move_damage_class: moves.MoveDamageClass
+    names: List[basics.Name]
     pokemon: List[Pokemon]
-    moves: List[Move]
+    moves: List[moves.Move]
 
 
 class TypePokemon(BaseModel):

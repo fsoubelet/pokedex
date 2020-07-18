@@ -2,19 +2,19 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models.basics import Name
-from pokedex.models.commons import GenerationGameIndex, VersionEncounterDetail
-from pokedex.models.encounters import EncounterMethod
-from pokedex.models.games import Generation, Pokedex, Version, VersionGroup
-from pokedex.models.pokemon import Pokemon, PokemonSpecies
+from pokedex.models import basics
+from pokedex.models import commons
+from pokedex.models import encounters
+from pokedex.models import games
+from pokedex.models import pokemon
 
 
 class Location(BaseModel):
     id: int
     name: str
     region: Region
-    names: List[Name]
-    game_indices: List[GenerationGameIndex]
+    names: List[basics.Name]
+    game_indices: List[commons.GenerationGameIndex]
     areas: List[LocationArea]
 
 
@@ -24,43 +24,43 @@ class LocationArea(BaseModel):
     game_index: int
     encounter_method_rates: List[EncounterMethodRate]
     location: Location
-    names: List[Name]
+    names: List[basics.Name]
     pokemon_encounters: List[PokemonEncounter]
 
 
 class EncounterMethodRate(BaseModel):
-    encounter_method: EncounterMethod
+    encounter_method: encounters.EncounterMethod
     version_details: List[EncounterVersionDetails]
 
 
 class EncounterVersionDetails(BaseModel):
     rate: int
-    version: Version
+    version: games.Version
 
 
 class PokemonEncounter(BaseModel):
-    pokemon: Pokemon
-    version_details: List[VersionEncounterDetail]
+    pokemon: pokemon.Pokemon
+    version_details: List[commons.VersionEncounterDetail]
 
 
 class PalParkArea(BaseModel):
     id: int
     name: str
-    names: List[Name]
+    names: List[basics.Name]
     pokemon_encounters: List[PalParkEncounterSpecies]
 
 
 class PalParkEncounterSpecies(BaseModel):
     base_score: int
     rate: int
-    pokemon_species: PokemonSpecies
+    pokemon_species: pokemon.PokemonSpecies
 
 
 class Region(BaseModel):
     id: int
     locations: List[Location]
     name: str
-    names: List[Name]
-    main_generation: Generation
-    pokedexes: List[Pokedex]
-    version_groups: List[VersionGroup]
+    names: List[basics.Name]
+    main_generation: games.Generation
+    pokedexes: List[games.Pokedex]
+    version_groups: List[games.VersionGroup]

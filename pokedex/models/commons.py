@@ -2,9 +2,9 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models.encounters import EncounterConditionValue, EncounterMethod
-from pokedex.models.games import Generation, Version, VersionGroup
-from pokedex.models.machines import Machine
+from pokedex.models import encounters
+from pokedex.models import games
+from pokedex.models import machines
 
 
 # class Language(BaseModel):
@@ -33,25 +33,25 @@ class Effect(BaseModel):
 class Encounter(BaseModel):
     min_level: int
     max_level: int
-    condition_values: List[EncounterConditionValue]
+    condition_values: List[encounters.EncounterConditionValue]
     chance: int
-    method: EncounterMethod
+    method: encounters.EncounterMethod
 
 
 class FlavorText(BaseModel):
     flavor_text: str
     language: Language
-    version: Version
+    version: games.Version
 
 
 class GenerationGameIndex(BaseModel):
     game_index: int
-    generation: Generation
+    generation: games.Generation
 
 
 class MachineVersionDetail(BaseModel):
-    machine: Machine
-    version_group: VersionGroup
+    machine: machines.Machine
+    version_group: games.VersionGroup
 
 
 # class Name(BaseModel):
@@ -71,17 +71,17 @@ class VerboseEffect(BaseModel):
 
 
 class VersionEncounterDetail(BaseModel):
-    version: Version
+    version: games.Version
     max_chance: int
     encounter_details: List[Encounter]
 
 
 class VersionGameIndex(BaseModel):
     game_index: int
-    version: Version
+    version: games.Version
 
 
 class VersionGroupFlavorText(BaseModel):
     text: str
     language: Language
-    version_group: VersionGroup
+    version_group: games.VersionGroup

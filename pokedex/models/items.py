@@ -2,18 +2,11 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models.basics import Name
-from pokedex.models.commons import (
-    Description,
-    Effect,
-    GenerationGameIndex,
-    MachineVersionDetail,
-    VerboseEffect,
-    VersionGroupFlavorText,
-)
-from pokedex.models.evolution import EvolutionChain
-from pokedex.models.games import Version
-from pokedex.models.pokemon import Pokemon
+from pokedex.models import basics
+from pokedex.models import commons
+from pokedex.models import evolution
+from pokedex.models import games
+from pokedex.models import pokemon
 
 
 class Item(BaseModel):
@@ -24,14 +17,14 @@ class Item(BaseModel):
     fling_effect: ItemFlingEffect
     attributes: List[ItemAttribute]
     category: ItemCategory
-    effect_entries: List[VerboseEffect]
-    flavor_text_entries: List[VersionGroupFlavorText]
-    game_indices: List[GenerationGameIndex]
-    names: List[Name]
+    effect_entries: List[commons.VerboseEffect]
+    flavor_text_entries: List[commons.VersionGroupFlavorText]
+    game_indices: List[commons.GenerationGameIndex]
+    names: List[basics.Name]
     sprites: ItemSprites
     held_by_pokemon: List[ItemHolderPokemon]
-    baby_trigger_for: EvolutionChain
-    machines: List[MachineVersionDetail]
+    baby_trigger_for: evolution.EvolutionChain
+    machines: List[commons.MachineVersionDetail]
 
 
 class ItemSprites(BaseModel):
@@ -39,35 +32,35 @@ class ItemSprites(BaseModel):
 
 
 class ItemHolderPokemon(BaseModel):
-    pokemon: Pokemon
+    pokemon: pokemon.Pokemon
     version_details: List[ItemHolderPokemonVersionDetail]
 
 
 class ItemHolderPokemonVersionDetail(BaseModel):
     rarity: int
-    version: Version
+    version: games.Version
 
 
 class ItemAttribute(BaseModel):
     id: int
     name: str
     items: List[Item]
-    names: List[Name]
-    descriptions: List[Description]
+    names: List[basics.Name]
+    descriptions: List[commons.Description]
 
 
 class ItemCategory(BaseModel):
     id: int
     name: str
     items: List[Item]
-    names: List[Name]
+    names: List[basics.Name]
     pocket: ItemPocket
 
 
 class ItemFlingEffect(BaseModel):
     id: int
     name: str
-    effect_entries: List[Effect]
+    effect_entries: List[commons.Effect]
     items: List[Item]
 
 
@@ -75,4 +68,4 @@ class ItemPocket(BaseModel):
     id: int
     name: str
     categories: List[ItemCategory]
-    names: List[Name]
+    names: List[basics.Name]

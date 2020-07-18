@@ -2,10 +2,10 @@ from typing import List
 
 from pydantic import BaseModel
 
-from pokedex.models.basics import Name
-from pokedex.models.contests import ContestType
-from pokedex.models.items import Item
-from pokedex.models.pokemon import Type
+from pokedex.models import basics
+from pokedex.models import contests
+from pokedex.models import items
+from pokedex.models import pokemon
 
 
 class Berry(BaseModel):
@@ -19,8 +19,13 @@ class Berry(BaseModel):
     soil_dryness: int
     firmness: BerryFirmness
     flavors: List[BerryFlavorMap]
-    item: Item
-    natural_gift_type: Type
+    item: items.Item
+    natural_gift_type: pokemon.Type
+
+
+class FlavorBerryMap(BaseModel):
+    potency: int
+    berry: Berry
 
 
 class BerryFlavorMap(BaseModel):
@@ -32,17 +37,12 @@ class BerryFirmness(BaseModel):
     id: int
     name: str
     berries: List[Berry]
-    names: List[Name]
+    names: List[basics.Name]
 
 
 class BerryFlavor(BaseModel):
     id: int
     name: str
     berries: List[FlavorBerryMap]
-    contest_type: ContestType
-    names: List[Name]
-
-
-class FlavorBerryMap(BaseModel):
-    potency: int
-    berry: Berry
+    contest_type: contests.ContestType
+    names: List[basics.Name]
