@@ -380,7 +380,7 @@ class PokemonSpecies(BaseModel):
 
 
 class MoveStatAffect(BaseModel):
-    change: int
+    change: Optional[int]
     move: Optional[NamedAPIResource]
 
 

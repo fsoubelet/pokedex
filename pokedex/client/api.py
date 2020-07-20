@@ -64,8 +64,8 @@ class PokeClient:
         if response.status_code != 200:
             logger.error(f"Expected status code 200 but received {response.status_code}, aborting")
             raise Exception(
-                f"GET request returned with status code {response.status_code}, "
-                f"check the validity of your parameter"
+                f"GET request returned with status code {response.status_code}, when querying "
+                f"address '{response.request.url}' check the validity of your parameter"
             )
 
     @functools.lru_cache()
@@ -86,7 +86,7 @@ class PokeClient:
         response: requests.Response = requests.get(berry_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting berry data into Berry object")
+        logger.trace(f"Formatting berry data into Berry object")
         return models.Berry(**response.json())
 
     @functools.lru_cache()
@@ -107,12 +107,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for berry firmness with ID " f"'{berry_firmness_id}'"
+            f"Sending GET request for data for berry firmness with ID '{berry_firmness_id}'"
         )
         response: requests.Response = requests.get(berry_firmness_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting berry firmness data into BerryFirmness object")
+        logger.trace(f"Formatting berry firmness data into BerryFirmness object")
         return models.BerryFirmness(**response.json())
 
     @functools.lru_cache()
@@ -136,7 +136,7 @@ class PokeClient:
         response: requests.Response = requests.get(berry_flavor_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting berry flavor data into BerryFlavor object")
+        logger.trace(f"Formatting berry flavor data into BerryFlavor object")
         return models.BerryFlavor(**response.json())
 
     @functools.lru_cache()
@@ -160,7 +160,7 @@ class PokeClient:
         response: requests.Response = requests.get(contest_type_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting contest type data into ContestType object")
+        logger.trace(f"Formatting contest type data into ContestType object")
         return models.ContestType(**response.json())
 
     @functools.lru_cache()
@@ -181,12 +181,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for contest effect with ID " f"'{contest_effect_id}'"
+            f"Sending GET request for data for contest effect with ID '{contest_effect_id}'"
         )
         response: requests.Response = requests.get(contest_effect_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting contest effect data into ContestEffect object")
+        logger.trace(f"Formatting contest effect data into ContestEffect object")
         return models.ContestEffect(**response.json())
 
     @functools.lru_cache()
@@ -215,7 +215,7 @@ class PokeClient:
         response: requests.Response = requests.get(super_contest_effect_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting super contest effect data into SuperContestEffect object")
+        logger.trace(f"Formatting super contest effect data into SuperContestEffect object")
         return models.SuperContestEffect(**response.json())
 
     @functools.lru_cache()
@@ -241,7 +241,7 @@ class PokeClient:
         response: requests.Response = requests.get(encounter_method_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting encounter method data into EncounterMedhod object")
+        logger.trace(f"Formatting encounter method data into EncounterMedhod object")
         return models.EncounterMethod(**response.json())
 
     @functools.lru_cache()
@@ -270,7 +270,7 @@ class PokeClient:
         response: requests.Response = requests.get(encounter_condition_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting encounter condition data into EncounterCondition object")
+        logger.trace(f"Formatting encounter condition data into EncounterCondition object")
         return models.EncounterCondition(**response.json())
 
     @functools.lru_cache()
@@ -300,7 +300,7 @@ class PokeClient:
         response: requests.Response = requests.get(encounter_condition_value_query_url)
         self.validate_response_status(response)
 
-        logger.debug(
+        logger.trace(
             f"Formatting encounter condition value data into EncounterConditionValue " f"object"
         )
         return models.EncounterConditionValue(**response.json())
@@ -323,12 +323,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for evolution chain with ID " f"'{evolution_chain_id}'"
+            f"Sending GET request for data for evolution chain with ID '{evolution_chain_id}'"
         )
         response: requests.Response = requests.get(evolution_chain_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting evolution chain data into EvolutionChain object")
+        logger.trace(f"Formatting evolution chain data into EvolutionChain object")
         return models.EvolutionChain(**response.json())
 
     @functools.lru_cache()
@@ -351,14 +351,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for evolution trigger with ID "
-            f""
-            f"'{evolution_trigger_id}'"
+            f"Sending GET request for data for evolution trigger with ID '{evolution_trigger_id}'"
         )
         response: requests.Response = requests.get(evolution_trigger_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting evolution trigger data into EvolutionTrigger object")
+        logger.trace(f"Formatting evolution trigger data into EvolutionTrigger object")
         return models.EvolutionTrigger(**response.json())
 
     @functools.lru_cache()
@@ -382,7 +380,7 @@ class PokeClient:
         response: requests.Response = requests.get(generation_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting generation data into Generation object")
+        logger.trace(f"Formatting generation data into Generation object")
         return models.Generation(**response.json())
 
     @functools.lru_cache()
@@ -404,7 +402,7 @@ class PokeClient:
         response: requests.Response = requests.get(pokedex_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting pokedex data into Pokedex object")
+        logger.trace(f"Formatting pokedex data into Pokedex object")
         return models.Pokedex(**response.json())
 
     @functools.lru_cache()
@@ -426,7 +424,7 @@ class PokeClient:
         response: requests.Response = requests.get(version_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting version data into Version object")
+        logger.trace(f"Formatting version data into Version object")
         return models.Version(**response.json())
 
     @functools.lru_cache()
@@ -450,7 +448,7 @@ class PokeClient:
         response: requests.Response = requests.get(version_group_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting version group data into VersionGroup object")
+        logger.trace(f"Formatting version group data into VersionGroup object")
         return models.VersionGroup(**response.json())
 
     @functools.lru_cache()
@@ -471,7 +469,7 @@ class PokeClient:
         response: requests.Response = requests.get(item_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting item data into Item object")
+        logger.trace(f"Formatting item data into Item object")
         return models.Item(**response.json())
 
     @functools.lru_cache()
@@ -492,12 +490,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for item attribute with ID " f"'{item_attribute_id}'"
+            f"Sending GET request for data for item attribute with ID '{item_attribute_id}'"
         )
         response: requests.Response = requests.get(item_attribute_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting item attribute data into ItemAttribute object")
+        logger.trace(f"Formatting item attribute data into ItemAttribute object")
         return models.ItemAttribute(**response.json())
 
     @functools.lru_cache()
@@ -521,7 +519,7 @@ class PokeClient:
         response: requests.Response = requests.get(item_category_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting item category data into ItemCategory object")
+        logger.trace(f"Formatting item category data into ItemCategory object")
         return models.ItemCategory(**response.json())
 
     @functools.lru_cache()
@@ -544,13 +542,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for item fling effect with ID "
-            f"'{item_fling_effect_id}'"
+            f"Sending GET request for data for item fling effect with ID '{item_fling_effect_id}'"
         )
         response: requests.Response = requests.get(item_fling_effect_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting item fling effect data into ItemFlingEffect object")
+        logger.trace(f"Formatting item fling effect data into ItemFlingEffect object")
         return models.ItemFlingEffect(**response.json())
 
     @functools.lru_cache()
@@ -574,7 +571,7 @@ class PokeClient:
         response: requests.Response = requests.get(item_pocket_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting item pocket data into ItemPocket object")
+        logger.trace(f"Formatting item pocket data into ItemPocket object")
         return models.ItemPocket(**response.json())
 
     @functools.lru_cache()
@@ -596,7 +593,7 @@ class PokeClient:
         response: requests.Response = requests.get(location_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting location data into Location object")
+        logger.trace(f"Formatting location data into Location object")
         return models.Location(**response.json())
 
     @functools.lru_cache()
@@ -620,7 +617,7 @@ class PokeClient:
         response: requests.Response = requests.get(location_area_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting location area data into LocationArea object")
+        logger.trace(f"Formatting location area data into LocationArea object")
         return models.LocationArea(**response.json())
 
     @functools.lru_cache()
@@ -644,7 +641,7 @@ class PokeClient:
         response: requests.Response = requests.get(pal_park_area_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting pal park area data into Location object")
+        logger.trace(f"Formatting pal park area data into Location object")
         return models.PalParkArea(**response.json())
 
     @functools.lru_cache()
@@ -665,7 +662,7 @@ class PokeClient:
         response: requests.Response = requests.get(region_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting region data into Region object")
+        logger.trace(f"Formatting region data into Region object")
         return models.Region(**response.json())
 
     @functools.lru_cache()
@@ -687,7 +684,7 @@ class PokeClient:
         response: requests.Response = requests.get(machine_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting machine data into Machine object")
+        logger.trace(f"Formatting machine data into Machine object")
         return models.Machine(**response.json())
 
     @functools.lru_cache()
@@ -708,7 +705,7 @@ class PokeClient:
         response: requests.Response = requests.get(move_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting move data into Move object")
+        logger.trace(f"Formatting move data into Move object")
         return models.Move(**response.json())
 
     @functools.lru_cache()
@@ -732,7 +729,7 @@ class PokeClient:
         response: requests.Response = requests.get(move_ailment_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting move ailment data into MoveAilment object")
+        logger.trace(f"Formatting move ailment data into MoveAilment object")
         return models.MoveAilment(**response.json())
 
     @functools.lru_cache()
@@ -755,13 +752,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for move battle style with ID "
-            f"'{move_battle_style_id}'"
+            f"Sending GET request for data for move battle style with ID '{move_battle_style_id}'"
         )
         response: requests.Response = requests.get(move_battle_style_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting move battle style data into MoveBattleStyle object")
+        logger.trace(f"Formatting move battle style data into MoveBattleStyle object")
         return models.MoveBattleStyle(**response.json())
 
     @functools.lru_cache()
@@ -785,7 +781,7 @@ class PokeClient:
         response: requests.Response = requests.get(move_category_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting move category data into ModelName object")
+        logger.trace(f"Formatting move category data into ModelName object")
         return models.ModelName(**response.json())
 
     @functools.lru_cache()
@@ -808,13 +804,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for move damage class with ID "
-            f"'{move_damage_class_id}'"
+            f"Sending GET request for data for move damage class with ID '{move_damage_class_id}'"
         )
         response: requests.Response = requests.get(move_damage_class_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting move damage class data into MoveDamageClass object")
+        logger.trace(f"Formatting move damage class data into MoveDamageClass object")
         return models.MoveDamageClass(**response.json())
 
     @functools.lru_cache()
@@ -837,13 +832,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for move learn method with ID "
-            f"'{move_learn_method_id}'"
+            f"Sending GET request for data for move learn method with ID '{move_learn_method_id}'"
         )
         response: requests.Response = requests.get(move_learn_method_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting move learn method data into MoveLearnMethod object")
+        logger.trace(f"Formatting move learn method data into MoveLearnMethod object")
         return models.MoveLearnMethod(**response.json())
 
     @functools.lru_cache()
@@ -867,7 +861,7 @@ class PokeClient:
         response: requests.Response = requests.get(move_target_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting move target data into Move object")
+        logger.trace(f"Formatting move target data into Move object")
         return models.MoveTarget(**response.json())
 
     @functools.lru_cache()
@@ -889,7 +883,7 @@ class PokeClient:
         response: requests.Response = requests.get(ability_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting ability data into Ability")
+        logger.trace(f"Formatting ability data into Ability")
         return models.Ability(**response.json())
 
     @functools.lru_cache()
@@ -915,7 +909,7 @@ class PokeClient:
         response: requests.Response = requests.get(characteristic_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting characteristic data into Characteristic")
+        logger.trace(f"Formatting characteristic data into Characteristic")
         return models.Characteristic(**response.json())
 
     @functools.lru_cache()
@@ -939,7 +933,7 @@ class PokeClient:
         response: requests.Response = requests.get(egg_group_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting egg group data into EggGroup")
+        logger.trace(f"Formatting egg group data into EggGroup")
         return models.EggGroup(**response.json())
 
     @functools.lru_cache()
@@ -960,7 +954,7 @@ class PokeClient:
         response: requests.Response = requests.get(gender_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting gender data into Gender object")
+        logger.trace(f"Formatting gender data into Gender object")
         return models.Gender(**response.json())
 
     @functools.lru_cache()
@@ -984,7 +978,7 @@ class PokeClient:
         response: requests.Response = requests.get(growth_rate_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting growth rate data into GrowthRate object")
+        logger.trace(f"Formatting growth rate data into GrowthRate object")
         return models.GrowthRate(**response.json())
 
     @functools.lru_cache()
@@ -1005,7 +999,7 @@ class PokeClient:
         response: requests.Response = requests.get(nature_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting nature data into Nature object")
+        logger.trace(f"Formatting nature data into Nature object")
         return models.Nature(**response.json())
 
     @functools.lru_cache()
@@ -1026,12 +1020,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for pokeathlon stat with ID " f"'{pokeathlon_stat_id}'"
+            f"Sending GET request for data for pokeathlon stat with ID '{pokeathlon_stat_id}'"
         )
         response: requests.Response = requests.get(pokeathlon_stat_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting pokeathlon stat data into PokeathlonStat object")
+        logger.trace(f"Formatting pokeathlon stat data into PokeathlonStat object")
         return models.PokeathlonStat(**response.json())
 
     @functools.lru_cache()
@@ -1053,7 +1047,7 @@ class PokeClient:
         response: requests.Response = requests.get(pokemon_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting pokemon data into Pokemon object")
+        logger.trace(f"Formatting pokemon data into Pokemon object")
         return models.Pokemon(**response.json())
 
     @functools.lru_cache()
@@ -1077,7 +1071,7 @@ class PokeClient:
         response: requests.Response = requests.get(pokemon_color_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting pokemon color data into PokemonColor object")
+        logger.trace(f"Formatting pokemon color data into PokemonColor object")
         return models.PokemonColor(**response.json())
 
     @functools.lru_cache()
@@ -1101,7 +1095,7 @@ class PokeClient:
         response: requests.Response = requests.get(pokemon_form_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting pokemon form data into PokemonForm object")
+        logger.trace(f"Formatting pokemon form data into PokemonForm object")
         return models.PokemonForm(**response.json())
 
     @functools.lru_cache()
@@ -1122,12 +1116,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for pokemon habitat with ID " f"'{pokemon_habitat_id}'"
+            f"Sending GET request for data for pokemon habitat with ID '{pokemon_habitat_id}'"
         )
         response: requests.Response = requests.get(pokemon_habitat_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting pokemon habitat data into PokemonHabitat object")
+        logger.trace(f"Formatting pokemon habitat data into PokemonHabitat object")
         return models.PokemonHabitat(**response.json())
 
     @functools.lru_cache()
@@ -1151,7 +1145,7 @@ class PokeClient:
         response: requests.Response = requests.get(pokemon_shape_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting pokemon shape data into PokemonShape object")
+        logger.trace(f"Formatting pokemon shape data into PokemonShape object")
         return models.PokemonShape(**response.json())
 
     @functools.lru_cache()
@@ -1172,12 +1166,12 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for pokemon species with ID " f"'{pokemon_species_id}'"
+            f"Sending GET request for data for pokemon species with ID '{pokemon_species_id}'"
         )
         response: requests.Response = requests.get(pokemon_species_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting pokemon species data into PokemonSpecies object")
+        logger.trace(f"Formatting pokemon species data into PokemonSpecies object")
         return models.PokemonSpecies(**response.json())
 
     @functools.lru_cache()
@@ -1198,7 +1192,7 @@ class PokeClient:
         response: requests.Response = requests.get(stat_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting stat data into Stat object")
+        logger.trace(f"Formatting stat data into Stat object")
         return models.Stat(**response.json())
 
     @functools.lru_cache()
@@ -1219,7 +1213,7 @@ class PokeClient:
         response: requests.Response = requests.get(type_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting type data into Type object")
+        logger.trace(f"Formatting type data into Type object")
         return models.Type(**response.json())
 
     @functools.lru_cache()
@@ -1241,5 +1235,5 @@ class PokeClient:
         response: requests.Response = requests.get(language_query_url)
         self.validate_response_status(response)
 
-        logger.debug(f"Formatting language data into Language object")
+        logger.trace(f"Formatting language data into Language object")
         return models.Language(**response.json())
