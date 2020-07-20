@@ -9,7 +9,7 @@ Model classes for the 'Moves' endpoint objects. Available endpoints are:
 - Move Targets (https://pokeapi.co/api/v2/move-target/{id or name}/)
 """
 
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -25,8 +25,8 @@ from pokedex.models.pokemon import AbilityEffectChange
 
 
 class ContestComboDetail(BaseModel):
-    use_before: List[NamedAPIResource]
-    use_after: List[NamedAPIResource]
+    use_before: Optional[List[NamedAPIResource]]
+    use_after: Optional[List[NamedAPIResource]]
 
 
 class ContestComboSets(BaseModel):
@@ -36,17 +36,17 @@ class ContestComboSets(BaseModel):
 
 class MoveFlavorText(BaseModel):
     flavor_text: str
-    language: NamedAPIResource
-    version_group: NamedAPIResource
+    language: Optional[NamedAPIResource]
+    version_group: Optional[NamedAPIResource]
 
 
 class MoveMetaData(BaseModel):
-    ailment: NamedAPIResource
-    category: NamedAPIResource
-    min_hits: int
-    max_hits: int
-    min_turns: int
-    max_turns: int
+    ailment: Optional[NamedAPIResource]
+    category: Optional[NamedAPIResource]
+    min_hits: Optional[int]
+    max_hits: Optional[int]
+    min_turns: Optional[int]
+    max_turns: Optional[int]
     drain: int
     healing: int
     crit_rate: int
@@ -56,18 +56,18 @@ class MoveMetaData(BaseModel):
 
 
 class PastMoveStatValues(BaseModel):
-    accuracy: int
-    effect_chance: int
-    power: int
-    pp: int
+    accuracy: Optional[int]
+    effect_chance: Optional[int]
+    power: Optional[int]
+    pp: Optional[int]
     effect_entries: List[VerboseEffect]
-    type: NamedAPIResource
-    version_group: NamedAPIResource
+    type: Optional[NamedAPIResource]
+    version_group: Optional[NamedAPIResource]
 
 
 class MoveStatChange(BaseModel):
     change: int
-    stat: NamedAPIResource
+    stat: Optional[NamedAPIResource]
 
 
 class Move(BaseModel):
@@ -79,27 +79,27 @@ class Move(BaseModel):
 
     id: int
     name: str
-    accuracy: int
-    effect_chance: int
+    accuracy: Optional[int]
+    effect_chance: Optional[int]
     pp: int
     priority: int
-    power: int
-    contest_combos: ContestComboSets
-    contest_type: NamedAPIResource
-    contest_effect: APIResource
-    damage_class: NamedAPIResource
+    power: Optional[int]
+    contest_combos: Optional[ContestComboSets]
+    contest_type: Optional[NamedAPIResource]
+    contest_effect: Optional[APIResource]
+    damage_class: Optional[NamedAPIResource]
     effect_entries: List[VerboseEffect]
     effect_changes: List[AbilityEffectChange]
     flavor_text_entries: List[MoveFlavorText]
-    generation: NamedAPIResource
+    generation: Optional[NamedAPIResource]
     machines: List[MachineVersionDetail]
     meta: MoveMetaData
     names: List[Name]
     past_values: List[PastMoveStatValues]
     stat_changes: List[MoveStatChange]
-    super_contest_effect: APIResource
-    target: NamedAPIResource
-    type: NamedAPIResource
+    super_contest_effect: Optional[APIResource]
+    target: Optional[NamedAPIResource]
+    type: Optional[NamedAPIResource]
 
 
 class MoveAilment(BaseModel):

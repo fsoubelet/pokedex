@@ -2,6 +2,7 @@
 Model classes for the 'Machines' endpoint objects. Available endpoints are:
 - Machines (https://pokeapi.co/api/v2/machine/{id}/)
 """
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -15,6 +16,6 @@ class Machine(BaseModel):
     """
 
     id: int
-    item: NamedAPIResource
-    move: NamedAPIResource
-    version_group: NamedAPIResource
+    item: Optional[NamedAPIResource]
+    move: Optional[NamedAPIResource]
+    version_group: Optional[NamedAPIResource]

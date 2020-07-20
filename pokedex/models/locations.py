@@ -6,7 +6,7 @@ Model classes for the 'Locations' endpoint objects. Available endpoints are:
 - Regions (https://pokeapi.co/api/v2/region/{id or name}/)
 """
 
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -26,7 +26,7 @@ class Location(BaseModel):
 
     id: int
     name: str
-    region: NamedAPIResource
+    region: Optional[NamedAPIResource]
     names: List[Name]
     game_indices: List[GenerationGameIndex]
     areas: List[NamedAPIResource]
@@ -34,16 +34,16 @@ class Location(BaseModel):
 
 class EncounterVersionDetails(BaseModel):
     rate: int
-    version: NamedAPIResource
+    version: Optional[NamedAPIResource]
 
 
 class EncounterMethodRate(BaseModel):
-    encounter_method: NamedAPIResource
+    encounter_method: Optional[NamedAPIResource]
     version_details: List[EncounterVersionDetails]
 
 
 class PokemonEncounter(BaseModel):
-    pokemon: NamedAPIResource
+    pokemon: Optional[NamedAPIResource]
     version_details: List[VersionEncounterDetail]
 
 
@@ -57,7 +57,7 @@ class LocationArea(BaseModel):
     name: str
     game_index: int
     encounter_method_rates: List[EncounterMethodRate]
-    location: NamedAPIResource
+    location: Optional[NamedAPIResource]
     names: List[Name]
     pokemon_encounters: List[PokemonEncounter]
 
@@ -65,7 +65,7 @@ class LocationArea(BaseModel):
 class PalParkEncounterSpecies(BaseModel):
     base_score: int
     rate: int
-    pokemon_species: NamedAPIResource
+    pokemon_species: Optional[NamedAPIResource]
 
 
 class PalParkArea(BaseModel):
@@ -90,6 +90,6 @@ class Region(BaseModel):
     locations: List[NamedAPIResource]
     name: str
     names: List[Name]
-    main_generation: NamedAPIResource
+    main_generation: Optional[NamedAPIResource]
     pokedexes: List[NamedAPIResource]
     version_groups: List[NamedAPIResource]

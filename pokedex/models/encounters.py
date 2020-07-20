@@ -5,7 +5,7 @@ Model classes for the 'Encounters' endpoint objects. Available endpoints are:
 - Encounter Condition Values (https://pokeapi.co/api/v2/encounter-condition-value/{id or name}/)
 """
 
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -41,5 +41,5 @@ class EncounterConditionValue(BaseModel):
 
     id: int
     name: str
-    condition: NamedAPIResource
+    condition: Optional[NamedAPIResource]
     names: List[Name]

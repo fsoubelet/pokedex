@@ -37,19 +37,19 @@ from pokedex.models.commons import (
 
 class AbilityEffectChange(BaseModel):
     effect_entries: List[Effect]
-    version_group: NamedAPIResource
+    version_group: Optional[NamedAPIResource]
 
 
 class AbilityFlavorText(BaseModel):
     flavor_text: str
-    language: NamedAPIResource
-    version_group: NamedAPIResource
+    language: Optional[NamedAPIResource]
+    version_group: Optional[NamedAPIResource]
 
 
 class AbilityPokemon(BaseModel):
     is_hidden: bool
     slot: int
-    pokemon: NamedAPIResource
+    pokemon: Optional[NamedAPIResource]
 
 
 class Ability(BaseModel):
@@ -61,7 +61,7 @@ class Ability(BaseModel):
     id: int
     name: str
     is_main_series: bool
-    generation: NamedAPIResource
+    generation: Optional[NamedAPIResource]
     names: List[Name]
     effect_entries: List[VerboseEffect]
     effect_changes: List[AbilityEffectChange]
@@ -94,7 +94,7 @@ class EggGroup(BaseModel):
 
 class PokemonSpeciesGender(BaseModel):
     rate: int
-    pokemon_species: NamedAPIResource
+    pokemon_species: Optional[NamedAPIResource]
 
 
 class Gender(BaseModel):
@@ -127,13 +127,13 @@ class GrowthRate(BaseModel):
 
 class NatureStatChange(BaseModel):
     max_change: int
-    pokeathlon_stat: NamedAPIResource
+    pokeathlon_stat: Optional[NamedAPIResource]
 
 
 class MoveBattleStylePreference(BaseModel):
     low_hp_preference: int
     high_hp_preference: int
-    move_battle_style: NamedAPIResource
+    move_battle_style: Optional[NamedAPIResource]
 
 
 class Nature(BaseModel):
@@ -141,10 +141,10 @@ class Nature(BaseModel):
 
     id: int
     name: str
-    decreased_stat: NamedAPIResource
-    increased_stat: NamedAPIResource
-    hates_flavor: NamedAPIResource
-    likes_flavor: NamedAPIResource
+    decreased_stat: Optional[NamedAPIResource]
+    increased_stat: Optional[NamedAPIResource]
+    hates_flavor: Optional[NamedAPIResource]
+    likes_flavor: Optional[NamedAPIResource]
     pokeathlon_stat_changes: List[NatureStatChange]
     move_battle_style_preferences: List[MoveBattleStylePreference]
     names: List[Name]
@@ -152,7 +152,7 @@ class Nature(BaseModel):
 
 class NaturePokeathlonStatAffect(BaseModel):
     max_change: int
-    nature: NamedAPIResource
+    nature: Optional[NamedAPIResource]
 
 
 class NaturePokeathlonStatAffectSets(BaseModel):
@@ -176,32 +176,32 @@ class PokeathlonStat(BaseModel):
 class PokemonAbility(BaseModel):
     is_hidden: bool
     slot: int
-    ability: NamedAPIResource
+    ability: Optional[NamedAPIResource]
 
 
 class PokemonHeldItemVersion(BaseModel):
-    version: NamedAPIResource
+    version: Optional[NamedAPIResource]
     rarity: int
 
 
 class PokemonHeldItem(BaseModel):
-    item: NamedAPIResource
+    item: Optional[NamedAPIResource]
     version_details: List[PokemonHeldItemVersion]
 
 
 class PokemonType(BaseModel):
     slot: int
-    type: NamedAPIResource
+    type: Optional[NamedAPIResource]
 
 
 class PokemonMoveVersion(BaseModel):
-    move_learn_method: NamedAPIResource
-    version_group: NamedAPIResource
+    move_learn_method: Optional[NamedAPIResource]
+    version_group: Optional[NamedAPIResource]
     level_learned_at: int
 
 
 class PokemonMove(BaseModel):
-    move: NamedAPIResource
+    move: Optional[NamedAPIResource]
     version_group_details: List[PokemonMoveVersion]
 
 
@@ -217,7 +217,7 @@ class PokemonSprites(BaseModel):
 
 
 class PokemonStat(BaseModel):
-    stat: NamedAPIResource
+    stat: Optional[NamedAPIResource]
     effort: int
     base_stat: int
 
@@ -244,13 +244,13 @@ class Pokemon(BaseModel):
     location_area_encounters: str
     moves: List[PokemonMove]
     sprites: PokemonSprites
-    species: NamedAPIResource
+    species: Optional[NamedAPIResource]
     stats: List[PokemonStat]
     types: List[PokemonType]
 
 
 class LocationAreaEncounter(BaseModel):
-    location_area: NamedAPIResource
+    location_area: Optional[NamedAPIResource]
     version_details: List[VersionEncounterDetail]
 
 
@@ -289,9 +289,9 @@ class PokemonForm(BaseModel):
     is_battle_only: bool
     is_mega: bool
     form_name: str
-    pokemon: NamedAPIResource
+    pokemon: Optional[NamedAPIResource]
     sprites: PokemonFormSprites
-    version_group: NamedAPIResource
+    version_group: Optional[NamedAPIResource]
     names: List[Name]
     form_names: List[Name]
 
@@ -310,7 +310,7 @@ class PokemonHabitat(BaseModel):
 
 class AwesomeName(BaseModel):
     awesome_name: str
-    language: NamedAPIResource
+    language: Optional[NamedAPIResource]
 
 
 class PokemonShape(BaseModel):
@@ -325,23 +325,23 @@ class PokemonShape(BaseModel):
 
 class PokemonSpeciesDexEntry(BaseModel):
     entry_number: int
-    pokedex: NamedAPIResource
+    pokedex: Optional[NamedAPIResource]
 
 
 class PalParkEncounterArea(BaseModel):
     base_score: int
     rate: int
-    area: NamedAPIResource
+    area: Optional[NamedAPIResource]
 
 
 class Genus(BaseModel):
     genus: str
-    language: NamedAPIResource
+    language: Optional[NamedAPIResource]
 
 
 class PokemonSpeciesVariety(BaseModel):
     is_default: bool
-    pokemon: NamedAPIResource
+    pokemon: Optional[NamedAPIResource]
 
 
 class PokemonSpecies(BaseModel):
@@ -362,15 +362,15 @@ class PokemonSpecies(BaseModel):
     hatch_counter: int
     has_gender_differences: bool
     forms_switchable: bool
-    growth_rate: NamedAPIResource
+    growth_rate: Optional[NamedAPIResource]
     pokedex_numbers: List[PokemonSpeciesDexEntry]
     egg_groups: List[NamedAPIResource]
-    color: NamedAPIResource
-    shape: NamedAPIResource
-    evolves_from_species: NamedAPIResource
-    evolution_chain: APIResource
-    habitat: NamedAPIResource
-    generation: NamedAPIResource
+    color: Optional[NamedAPIResource]
+    shape: Optional[NamedAPIResource]
+    evolves_from_species: Optional[NamedAPIResource]
+    evolution_chain: Optional[APIResource]
+    habitat: Optional[NamedAPIResource]
+    generation: Optional[NamedAPIResource]
     names: List[Name]
     pal_park_encounters: List[PalParkEncounterArea]
     flavor_text_entries: List[FlavorText]
@@ -381,7 +381,7 @@ class PokemonSpecies(BaseModel):
 
 class MoveStatAffect(BaseModel):
     change: int
-    move: NamedAPIResource
+    move: Optional[NamedAPIResource]
 
 
 class MoveStatAffectSets(BaseModel):
@@ -407,7 +407,7 @@ class Stat(BaseModel):
     affecting_moves: MoveStatAffectSets
     affecting_natures: NatureStatAffectSets
     characteristics: List[APIResource]
-    move_damage_class: NamedAPIResource
+    move_damage_class: Optional[NamedAPIResource]
     names: List[Name]
 
 
@@ -422,7 +422,7 @@ class TypeRelations(BaseModel):
 
 class TypePokemon(BaseModel):
     slot: int
-    pokemon: NamedAPIResource
+    pokemon: Optional[NamedAPIResource]
 
 
 class Type(BaseModel):
@@ -436,8 +436,8 @@ class Type(BaseModel):
     name: str
     damage_relations: TypeRelations
     game_indices: List[GenerationGameIndex]
-    generation: NamedAPIResource
-    move_damage_class: NamedAPIResource
+    generation: Optional[NamedAPIResource]
+    move_damage_class: Optional[NamedAPIResource]
     names: List[Name]
     pokemon: List[TypePokemon]
     moves: List[NamedAPIResource]

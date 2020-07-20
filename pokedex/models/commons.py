@@ -2,7 +2,7 @@
 Model classes for the 'Utility' objects.
 """
 
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -14,7 +14,7 @@ class NamedAPIResource(BaseModel):
 
 class Name(BaseModel):
     name: str
-    language: NamedAPIResource
+    language: Optional[NamedAPIResource]
 
 
 class Language(BaseModel):
@@ -34,12 +34,12 @@ class APIResource(BaseModel):
 
 class Description(BaseModel):
     description: str
-    language: NamedAPIResource
+    language: Optional[NamedAPIResource]
 
 
 class Effect(BaseModel):
     effect: str
-    language: NamedAPIResource
+    language: Optional[NamedAPIResource]
 
 
 class Encounter(BaseModel):
@@ -47,43 +47,43 @@ class Encounter(BaseModel):
     max_level: int
     condition_values: List[NamedAPIResource]
     chance: int
-    method: NamedAPIResource
+    method: Optional[NamedAPIResource]
 
 
 class FlavorText(BaseModel):
     flavor_text: str
-    language: NamedAPIResource
-    version: NamedAPIResource
+    language: Optional[NamedAPIResource]
+    version: Optional[NamedAPIResource]
 
 
 class GenerationGameIndex(BaseModel):
     game_index: int
-    generation: NamedAPIResource
+    generation: Optional[NamedAPIResource]
 
 
 class MachineVersionDetail(BaseModel):
     machine: APIResource
-    version_group: NamedAPIResource
+    version_group: Optional[NamedAPIResource]
 
 
 class VerboseEffect(BaseModel):
     effect: str
     short_effect: str
-    language: NamedAPIResource
+    language: Optional[NamedAPIResource]
 
 
 class VersionEncounterDetail(BaseModel):
-    version: NamedAPIResource
+    version: Optional[NamedAPIResource]
     max_chance: int
     encounter_details: List[Encounter]
 
 
 class VersionGameIndex(BaseModel):
     game_index: int
-    version: NamedAPIResource
+    version: Optional[NamedAPIResource]
 
 
 class VersionGroupFlavorText(BaseModel):
     text: str
-    language: NamedAPIResource
-    version_group: NamedAPIResource
+    language: Optional[NamedAPIResource]
+    version_group: Optional[NamedAPIResource]

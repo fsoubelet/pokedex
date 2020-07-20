@@ -7,7 +7,7 @@ Model classes for the 'Items' endpoint objects. Available endpoints are:
 - Item Pockets (https://pokeapi.co/api/v2/item-pocket/{id or name}/)
 """
 
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -30,11 +30,11 @@ class ItemSprites(BaseModel):
 
 class ItemHolderPokemonVersionDetail(BaseModel):
     rarity: int
-    version: NamedAPIResource
+    version: Optional[NamedAPIResource]
 
 
 class ItemHolderPokemon(BaseModel):
-    pokemon: NamedAPIResource
+    pokemon: Optional[NamedAPIResource]
     version_details: List[ItemHolderPokemonVersionDetail]
 
 
@@ -48,17 +48,17 @@ class Item(BaseModel):
     id: int
     name: str
     cost: int
-    fling_power: int
-    fling_effect: NamedAPIResource
+    fling_power: Optional[int]
+    fling_effect: Optional[NamedAPIResource]
     attributes: List[NamedAPIResource]
-    category: NamedAPIResource
+    category: Optional[NamedAPIResource]
     effect_entries: List[VerboseEffect]
     flavor_text_entries: List[VersionGroupFlavorText]
     game_indices: List[GenerationGameIndex]
     names: List[Name]
     sprites: ItemSprites
     held_by_pokemon: List[ItemHolderPokemon]
-    baby_trigger_for: APIResource
+    baby_trigger_for: Optional[APIResource]
     machines: List[MachineVersionDetail]
 
 
@@ -81,7 +81,7 @@ class ItemCategory(BaseModel):
     name: str
     items: List[NamedAPIResource]
     names: List[Name]
-    pocket: NamedAPIResource
+    pocket: Optional[NamedAPIResource]
 
 
 class ItemFlingEffect(BaseModel):
