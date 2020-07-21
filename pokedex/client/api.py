@@ -12,7 +12,7 @@ class PokeClient:
     High-level object to query data from the PokeAPI. The version 2 of the API is used, and each
     endpoint of the API is covered by a function from this client. Each of this functions makes
     use of an LRU cache to avoid querying results too many times. Beware, as that may be
-    memory-intensive..
+    memory-intensive.
     """
 
     def __init__(self):
