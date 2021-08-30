@@ -45,7 +45,7 @@ class PokeClient:
         """
         if not (isinstance(provided_id, str) or isinstance(provided_id, int)):
             logger.error(
-                f"The provided pokemon ID is of type '{type(pokemon_id)}' but should be "
+                f"The provided pokemon ID is of type '{type(provided_id)}' but should be "
                 f"either 'int' or 'string'"
             )
             raise TypeError("Invalid type for provided ID, should be either 'integer' or 'string'.")
