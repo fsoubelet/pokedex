@@ -7,6 +7,7 @@ from loguru import logger
 
 from pokedex import models
 
+RESPONSE_OK: int = 200
 
 class PokeClient:
     """
@@ -49,7 +50,8 @@ class PokeClient:
                 f"The provided pokemon ID is of type '{type(provided_id)}' but should be "
                 f"either 'int' or 'string'"
             )
-            raise TypeError("Invalid type for provided ID, should be either 'integer' or 'string'.")
+            msg = "Invalid type for provided ID, should be either 'integer' or 'string'."
+            raise TypeError(msg)
 
     @staticmethod
     def validate_response_status(response: requests.Response) -> None:
@@ -62,12 +64,13 @@ class PokeClient:
         Returns:
             Nothing, but will raise an exception if status code is not 200.
         """
-        if response.status_code != 200:
+        if response.status_code != RESPONSE_OK:
             logger.error(f"Expected status code 200 but received {response.status_code}, aborting")
-            raise Exception(
+            msg = (
                 f"GET request returned with status code {response.status_code}, when querying "
                 f"address '{response.request.url}' check the validity of your parameter"
             )
+            raise Exception(msg)  # noqa: TRY002
 
     @functools.lru_cache
     def get_berry(self, berry_id: str | int) -> models.Berry:
