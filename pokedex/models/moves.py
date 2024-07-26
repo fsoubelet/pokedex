@@ -10,8 +10,6 @@ Model classes for the 'Moves' endpoint objects. Available endpoints are:
 """
 from __future__ import annotations
 
-from typing import List
-
 from pydantic import BaseModel
 
 from pokedex.models.commons import (
@@ -26,8 +24,8 @@ from pokedex.models.pokemon import AbilityEffectChange
 
 
 class ContestComboDetail(BaseModel):
-    use_before: List[NamedAPIResource] | None
-    use_after: List[NamedAPIResource] | None
+    use_before: list[NamedAPIResource] | None
+    use_after: list[NamedAPIResource] | None
 
 
 class ContestComboSets(BaseModel):
@@ -61,7 +59,7 @@ class PastMoveStatValues(BaseModel):
     effect_chance: int | None
     power: int | None
     pp: int | None
-    effect_entries: List[VerboseEffect]
+    effect_entries: list[VerboseEffect]
     type: NamedAPIResource | None
     version_group: NamedAPIResource | None
 
@@ -89,15 +87,15 @@ class Move(BaseModel):
     contest_type: NamedAPIResource | None
     contest_effect: APIResource | None
     damage_class: NamedAPIResource | None
-    effect_entries: List[VerboseEffect]
-    effect_changes: List[AbilityEffectChange]
-    flavor_text_entries: List[MoveFlavorText]
+    effect_entries: list[VerboseEffect]
+    effect_changes: list[AbilityEffectChange]
+    flavor_text_entries: list[MoveFlavorText]
     generation: NamedAPIResource | None
-    machines: List[MachineVersionDetail]
+    machines: list[MachineVersionDetail]
     meta: MoveMetaData
-    names: List[Name]
-    past_values: List[PastMoveStatValues]
-    stat_changes: List[MoveStatChange]
+    names: list[Name]
+    past_values: list[PastMoveStatValues]
+    stat_changes: list[MoveStatChange]
     super_contest_effect: APIResource | None
     target: NamedAPIResource | None
     type: NamedAPIResource | None
@@ -108,8 +106,8 @@ class MoveAilment(BaseModel):
 
     id: int
     name: str
-    moves: List[NamedAPIResource]
-    names: List[Name]
+    moves: list[NamedAPIResource]
+    names: list[Name]
 
 
 class MoveBattleStyle(BaseModel):
@@ -117,7 +115,7 @@ class MoveBattleStyle(BaseModel):
 
     id: int
     name: str
-    names: List[Name]
+    names: list[Name]
 
 
 class ModelName(BaseModel):
@@ -125,8 +123,8 @@ class ModelName(BaseModel):
 
     id: int
     name: str
-    moves: List[NamedAPIResource]
-    descriptions: List[Description]
+    moves: list[NamedAPIResource]
+    descriptions: list[Description]
 
 
 class MoveDamageClass(BaseModel):
@@ -134,9 +132,9 @@ class MoveDamageClass(BaseModel):
 
     id: int
     name: str
-    descriptions: List[Description]
-    moves: List[NamedAPIResource]
-    names: List[Name]
+    descriptions: list[Description]
+    moves: list[NamedAPIResource]
+    names: list[Name]
 
 
 class MoveLearnMethod(BaseModel):
@@ -144,9 +142,9 @@ class MoveLearnMethod(BaseModel):
 
     id: int
     name: str
-    descriptions: List[Description]
-    names: List[Name]
-    version_groups: List[NamedAPIResource]
+    descriptions: list[Description]
+    names: list[Name]
+    version_groups: list[NamedAPIResource]
 
 
 class MoveTarget(BaseModel):
@@ -157,6 +155,6 @@ class MoveTarget(BaseModel):
 
     id: int
     name: str
-    descriptions: List[Description]
-    moves: List[NamedAPIResource]
-    names: List[Name]
+    descriptions: list[Description]
+    moves: list[NamedAPIResource]
+    names: list[Name]

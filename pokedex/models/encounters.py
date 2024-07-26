@@ -7,8 +7,6 @@ Model classes for the 'Encounters' endpoint objects. Available endpoints are:
 
 from __future__ import annotations
 
-from typing import List
-
 from pydantic import BaseModel
 
 from pokedex.models.commons import Name, NamedAPIResource
@@ -23,7 +21,7 @@ class EncounterMethod(BaseModel):
     id: int
     name: str
     order: int
-    names: List[Name]
+    names: list[Name]
 
 
 class EncounterCondition(BaseModel):
@@ -31,8 +29,8 @@ class EncounterCondition(BaseModel):
 
     id: int
     name: str
-    names: List[Name]
-    values: List[NamedAPIResource]
+    names: list[Name]
+    values: list[NamedAPIResource]
 
 
 class EncounterConditionValue(BaseModel):
@@ -44,4 +42,4 @@ class EncounterConditionValue(BaseModel):
     id: int
     name: str
     condition: NamedAPIResource | None
-    names: List[Name]
+    names: list[Name]

@@ -7,8 +7,6 @@ Model classes for the 'Games' endpoint objects. Available endpoints are:
 """
 from __future__ import annotations
 
-from typing import List
-
 from pydantic import BaseModel
 
 from pokedex.models.commons import Description, Name, NamedAPIResource
@@ -23,13 +21,13 @@ class Generation(BaseModel):
 
     id: int
     name: str
-    abilities: List[NamedAPIResource]
-    names: List[Name]
+    abilities: list[NamedAPIResource]
+    names: list[Name]
     main_region: NamedAPIResource | None
-    moves: List[NamedAPIResource]
-    pokemon_species: List[NamedAPIResource]
-    types: List[NamedAPIResource]
-    version_groups: List[NamedAPIResource]
+    moves: list[NamedAPIResource]
+    pokemon_species: list[NamedAPIResource]
+    types: list[NamedAPIResource]
+    version_groups: list[NamedAPIResource]
 
 
 class PokemonEntry(BaseModel):
@@ -47,11 +45,11 @@ class Pokedex(BaseModel):
     id: int
     name: str
     is_main_series: bool
-    descriptions: List[Description]
-    names: List[Name]
-    pokemon_entries: List[PokemonEntry]
+    descriptions: list[Description]
+    names: list[Name]
+    pokemon_entries: list[PokemonEntry]
     region: NamedAPIResource | None
-    version_groups: List[NamedAPIResource]
+    version_groups: list[NamedAPIResource]
 
 
 class Version(BaseModel):
@@ -59,7 +57,7 @@ class Version(BaseModel):
 
     id: int
     name: str
-    names: List[Name]
+    names: list[Name]
     version_group: NamedAPIResource | None
 
 
@@ -70,7 +68,7 @@ class VersionGroup(BaseModel):
     name: str
     order: int
     generation: NamedAPIResource | None
-    move_learn_methods: List[NamedAPIResource]
-    pokedexes: List[NamedAPIResource]
-    regions: List[NamedAPIResource]
-    versions: List[NamedAPIResource]
+    move_learn_methods: list[NamedAPIResource]
+    pokedexes: list[NamedAPIResource]
+    regions: list[NamedAPIResource]
+    versions: list[NamedAPIResource]

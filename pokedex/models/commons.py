@@ -3,8 +3,6 @@ Model classes for the 'Utility' objects.
 """
 from __future__ import annotations
 
-from typing import List
-
 from pydantic import BaseModel
 
 
@@ -26,7 +24,7 @@ class Language(BaseModel):
     official: bool
     iso639: str
     iso3166: str
-    names: List[Name]
+    names: list[Name]
 
 
 class APIResource(BaseModel):
@@ -46,7 +44,7 @@ class Effect(BaseModel):
 class Encounter(BaseModel):
     min_level: int
     max_level: int
-    condition_values: List[NamedAPIResource]
+    condition_values: list[NamedAPIResource]
     chance: int
     method: NamedAPIResource | None
 
@@ -76,7 +74,7 @@ class VerboseEffect(BaseModel):
 class VersionEncounterDetail(BaseModel):
     version: NamedAPIResource | None
     max_chance: int
-    encounter_details: List[Encounter]
+    encounter_details: list[Encounter]
 
 
 class VersionGameIndex(BaseModel):

@@ -8,8 +8,6 @@ Model classes for the 'Items' endpoint objects. Available endpoints are:
 """
 from __future__ import annotations
 
-from typing import List
-
 from pydantic import BaseModel
 
 from pokedex.models.commons import (
@@ -36,7 +34,7 @@ class ItemHolderPokemonVersionDetail(BaseModel):
 
 class ItemHolderPokemon(BaseModel):
     pokemon: NamedAPIResource | None
-    version_details: List[ItemHolderPokemonVersionDetail]
+    version_details: list[ItemHolderPokemonVersionDetail]
 
 
 class Item(BaseModel):
@@ -51,16 +49,16 @@ class Item(BaseModel):
     cost: int
     fling_power: int | None
     fling_effect: NamedAPIResource | None
-    attributes: List[NamedAPIResource]
+    attributes: list[NamedAPIResource]
     category: NamedAPIResource | None
-    effect_entries: List[VerboseEffect]
-    flavor_text_entries: List[VersionGroupFlavorText]
-    game_indices: List[GenerationGameIndex]
-    names: List[Name]
+    effect_entries: list[VerboseEffect]
+    flavor_text_entries: list[VersionGroupFlavorText]
+    game_indices: list[GenerationGameIndex]
+    names: list[Name]
     sprites: ItemSprites
-    held_by_pokemon: List[ItemHolderPokemon]
+    held_by_pokemon: list[ItemHolderPokemon]
     baby_trigger_for: APIResource | None
-    machines: List[MachineVersionDetail]
+    machines: list[MachineVersionDetail]
 
 
 class ItemAttribute(BaseModel):
@@ -70,9 +68,9 @@ class ItemAttribute(BaseModel):
 
     id: int
     name: str
-    items: List[NamedAPIResource]
-    names: List[Name]
-    descriptions: List[Description]
+    items: list[NamedAPIResource]
+    names: list[Name]
+    descriptions: list[Description]
 
 
 class ItemCategory(BaseModel):
@@ -80,8 +78,8 @@ class ItemCategory(BaseModel):
 
     id: int
     name: str
-    items: List[NamedAPIResource]
-    names: List[Name]
+    items: list[NamedAPIResource]
+    names: list[Name]
     pocket: NamedAPIResource | None
 
 
@@ -90,8 +88,8 @@ class ItemFlingEffect(BaseModel):
 
     id: int
     name: str
-    effect_entries: List[Effect]
-    items: List[NamedAPIResource]
+    effect_entries: list[Effect]
+    items: list[NamedAPIResource]
 
 
 class ItemPocket(BaseModel):
@@ -99,5 +97,5 @@ class ItemPocket(BaseModel):
 
     id: int
     name: str
-    categories: List[NamedAPIResource]
-    names: List[Name]
+    categories: list[NamedAPIResource]
+    names: list[Name]

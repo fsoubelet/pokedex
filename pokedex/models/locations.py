@@ -7,8 +7,6 @@ Model classes for the 'Locations' endpoint objects. Available endpoints are:
 """
 from __future__ import annotations
 
-from typing import List
-
 from pydantic import BaseModel
 
 from pokedex.models.commons import (
@@ -28,9 +26,9 @@ class Location(BaseModel):
     id: int
     name: str
     region: NamedAPIResource | None
-    names: List[Name]
-    game_indices: List[GenerationGameIndex]
-    areas: List[NamedAPIResource]
+    names: list[Name]
+    game_indices: list[GenerationGameIndex]
+    areas: list[NamedAPIResource]
 
 
 class EncounterVersionDetails(BaseModel):
@@ -40,12 +38,12 @@ class EncounterVersionDetails(BaseModel):
 
 class EncounterMethodRate(BaseModel):
     encounter_method: NamedAPIResource | None
-    version_details: List[EncounterVersionDetails]
+    version_details: list[EncounterVersionDetails]
 
 
 class PokemonEncounter(BaseModel):
     pokemon: NamedAPIResource | None
-    version_details: List[VersionEncounterDetail]
+    version_details: list[VersionEncounterDetail]
 
 
 class LocationArea(BaseModel):
@@ -57,10 +55,10 @@ class LocationArea(BaseModel):
     id: int
     name: str
     game_index: int
-    encounter_method_rates: List[EncounterMethodRate]
+    encounter_method_rates: list[EncounterMethodRate]
     location: NamedAPIResource | None
-    names: List[Name]
-    pokemon_encounters: List[PokemonEncounter]
+    names: list[Name]
+    pokemon_encounters: list[PokemonEncounter]
 
 
 class PalParkEncounterSpecies(BaseModel):
@@ -77,8 +75,8 @@ class PalParkArea(BaseModel):
 
     id: int
     name: str
-    names: List[Name]
-    pokemon_encounters: List[PalParkEncounterSpecies]
+    names: list[Name]
+    pokemon_encounters: list[PalParkEncounterSpecies]
 
 
 class Region(BaseModel):
@@ -88,9 +86,9 @@ class Region(BaseModel):
     """
 
     id: int
-    locations: List[NamedAPIResource]
+    locations: list[NamedAPIResource]
     name: str
-    names: List[Name]
+    names: list[Name]
     main_generation: NamedAPIResource | None
-    pokedexes: List[NamedAPIResource]
-    version_groups: List[NamedAPIResource]
+    pokedexes: list[NamedAPIResource]
+    version_groups: list[NamedAPIResource]
