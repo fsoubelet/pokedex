@@ -2,6 +2,7 @@
 Model classes for the 'Machines' endpoint objects. Available endpoints are:
 - Machines (https://pokeapi.co/api/v2/machine/{id}/)
 """
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING

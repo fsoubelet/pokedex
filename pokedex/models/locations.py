@@ -5,6 +5,7 @@ Model classes for the 'Locations' endpoint objects. Available endpoints are:
 - Pal Park Areas (https://pokeapi.co/api/v2/pal-park-area/{id or name}/)
 - Regions (https://pokeapi.co/api/v2/region/{id or name}/)
 """
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING

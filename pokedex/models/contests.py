@@ -4,6 +4,7 @@ Model classes for the 'Contests' endpoint objects. Available endpoints are:
 - Contest Effects (https://pokeapi.co/api/v2/contest-effect/{id}/)
 - Super Contest Effects (https://pokeapi.co/api/v2/super-contest-effect/{id}/)
 """
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING

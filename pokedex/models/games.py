@@ -5,6 +5,7 @@ Model classes for the 'Games' endpoint objects. Available endpoints are:
 - Version (https://pokeapi.co/api/v2/version/{id or name}/)
 - Version Groups (https://pokeapi.co/api/v2/version-group/{id or name}/)
 """
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING

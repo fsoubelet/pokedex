@@ -5,7 +5,6 @@ like to change this just add a 'limit' query parameter to the GET request, e.g. 
 'offset' to move to the next page, e.g. ?limit=60&offset=60.
 """
 
-
 from pydantic import BaseModel
 
 from pokedex.models.commons import APIResource, NamedAPIResource

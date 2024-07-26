@@ -6,6 +6,7 @@ Model classes for the 'Items' endpoint objects. Available endpoints are:
 - Item Fling Effects (https://pokeapi.co/api/v2/item-fling-effect/{id or name}/)
 - Item Pockets (https://pokeapi.co/api/v2/item-pocket/{id or name}/)
 """
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING

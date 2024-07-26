@@ -8,6 +8,7 @@ Model classes for the 'Moves' endpoint objects. Available endpoints are:
 - Move Learn Methods (https://pokeapi.co/api/v2/move-learn-method/{id or name}/)
 - Move Targets (https://pokeapi.co/api/v2/move-target/{id or name}/)
 """
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING

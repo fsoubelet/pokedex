@@ -1,6 +1,7 @@
 """
 Model classes for the 'Utility' objects.
 """
+
 from __future__ import annotations
 
 from pydantic import BaseModel

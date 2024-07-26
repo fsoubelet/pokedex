@@ -9,6 +9,7 @@ from pokedex import models
 
 RESPONSE_OK: int = 200
 
+
 class PokeClient:
     """
     High-level object to query data from the PokeAPI. The version 2 of the API is used, and each
@@ -110,9 +111,7 @@ class PokeClient:
             item_id=berry_firmness_id, item_type="berry-firmness"
         )
 
-        logger.debug(
-            f"Sending GET request for data for berry firmness with ID '{berry_firmness_id}'"
-        )
+        logger.debug(f"Sending GET request for data for berry firmness with ID '{berry_firmness_id}'")
         response: requests.Response = requests.get(berry_firmness_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -132,9 +131,7 @@ class PokeClient:
             A pokedex.models.berries.BerryFlavor oject of the item's data.
         """
         self.validate_id(berry_flavor_id)
-        berry_flavor_query_url: str = self.format_query_url(
-            item_id=berry_flavor_id, item_type="berry-flavor"
-        )
+        berry_flavor_query_url: str = self.format_query_url(item_id=berry_flavor_id, item_type="berry-flavor")
 
         logger.debug(f"Sending GET request for data for berry flavor with ID '{berry_flavor_id}'")
         response: requests.Response = requests.get(berry_flavor_query_url, timeout=10)
@@ -156,9 +153,7 @@ class PokeClient:
             A pokedex.models.contests.ContestType oject of the item's data.
         """
         self.validate_id(contest_type_id)
-        contest_type_query_url: str = self.format_query_url(
-            item_id=contest_type_id, item_type="contest-type"
-        )
+        contest_type_query_url: str = self.format_query_url(item_id=contest_type_id, item_type="contest-type")
 
         logger.debug(f"Sending GET request for data for contest type with ID '{contest_type_id}'")
         response: requests.Response = requests.get(contest_type_query_url, timeout=10)
@@ -184,9 +179,7 @@ class PokeClient:
             item_id=contest_effect_id, item_type="contest-effect"
         )
 
-        logger.debug(
-            f"Sending GET request for data for contest effect with ID '{contest_effect_id}'"
-        )
+        logger.debug(f"Sending GET request for data for contest effect with ID '{contest_effect_id}'")
         response: requests.Response = requests.get(contest_effect_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -194,9 +187,7 @@ class PokeClient:
         return models.ContestEffect(**response.json())
 
     @functools.lru_cache
-    def get_super_contest_effect(
-        self, super_contest_effect_id: str | int
-    ) -> models.SuperContestEffect:
+    def get_super_contest_effect(self, super_contest_effect_id: str | int) -> models.SuperContestEffect:
         """
         Query a super contest effect's data and return it organised in a SuperContestEffect object.
 
@@ -213,8 +204,7 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for super contest effect with ID "
-            f"'{super_contest_effect_id}'"
+            f"Sending GET request for data for super contest effect with ID " f"'{super_contest_effect_id}'"
         )
         response: requests.Response = requests.get(super_contest_effect_query_url, timeout=10)
         self.validate_response_status(response)
@@ -239,9 +229,7 @@ class PokeClient:
             item_id=encounter_method_id, item_type="encounter-method"
         )
 
-        logger.debug(
-            f"Sending GET request for data for encounter method with ID '{encounter_method_id}'"
-        )
+        logger.debug(f"Sending GET request for data for encounter method with ID '{encounter_method_id}'")
         response: requests.Response = requests.get(encounter_method_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -249,9 +237,7 @@ class PokeClient:
         return models.EncounterMethod(**response.json())
 
     @functools.lru_cache
-    def get_encounter_condition(
-        self, encounter_condition_id: str | int
-    ) -> models.EncounterCondition:
+    def get_encounter_condition(self, encounter_condition_id: str | int) -> models.EncounterCondition:
         """
         Query an encounter condition's data and return it organised in an EncounterCondition object.
 
@@ -268,8 +254,7 @@ class PokeClient:
         )
 
         logger.debug(
-            f"Sending GET request for data for encounter condition with ID "
-            f"'{encounter_condition_id}'"
+            f"Sending GET request for data for encounter condition with ID " f"'{encounter_condition_id}'"
         )
         response: requests.Response = requests.get(encounter_condition_query_url, timeout=10)
         self.validate_response_status(response)
@@ -304,9 +289,7 @@ class PokeClient:
         response: requests.Response = requests.get(encounter_condition_value_query_url, timeout=10)
         self.validate_response_status(response)
 
-        logger.trace(
-            "Formatting encounter condition value data into EncounterConditionValue " "object"
-        )
+        logger.trace("Formatting encounter condition value data into EncounterConditionValue " "object")
         return models.EncounterConditionValue(**response.json())
 
     @functools.lru_cache
@@ -326,9 +309,7 @@ class PokeClient:
             item_id=evolution_chain_id, item_type="evolution-chain"
         )
 
-        logger.debug(
-            f"Sending GET request for data for evolution chain with ID '{evolution_chain_id}'"
-        )
+        logger.debug(f"Sending GET request for data for evolution chain with ID '{evolution_chain_id}'")
         response: requests.Response = requests.get(evolution_chain_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -336,9 +317,7 @@ class PokeClient:
         return models.EvolutionChain(**response.json())
 
     @functools.lru_cache
-    def get_evolution_trigger(
-        self, evolution_trigger_id: str | int
-    ) -> models.EvolutionTrigger:
+    def get_evolution_trigger(self, evolution_trigger_id: str | int) -> models.EvolutionTrigger:
         """
         Query an evolution trigger's data and return it organised in an EvolutionTrigger object.
 
@@ -354,9 +333,7 @@ class PokeClient:
             item_id=evolution_trigger_id, item_type="evolution-trigger"
         )
 
-        logger.debug(
-            f"Sending GET request for data for evolution trigger with ID '{evolution_trigger_id}'"
-        )
+        logger.debug(f"Sending GET request for data for evolution trigger with ID '{evolution_trigger_id}'")
         response: requests.Response = requests.get(evolution_trigger_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -376,9 +353,7 @@ class PokeClient:
             A pokedex.models.games.Generation oject of the item's data.
         """
         self.validate_id(generation_id)
-        generation_query_url: str = self.format_query_url(
-            item_id=generation_id, item_type="generation"
-        )
+        generation_query_url: str = self.format_query_url(item_id=generation_id, item_type="generation")
 
         logger.debug(f"Sending GET request for data for generation with ID '{generation_id}'")
         response: requests.Response = requests.get(generation_query_url, timeout=10)
@@ -493,9 +468,7 @@ class PokeClient:
             item_id=item_attribute_id, item_type="item-attribute"
         )
 
-        logger.debug(
-            f"Sending GET request for data for item attribute with ID '{item_attribute_id}'"
-        )
+        logger.debug(f"Sending GET request for data for item attribute with ID '{item_attribute_id}'")
         response: requests.Response = requests.get(item_attribute_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -527,9 +500,7 @@ class PokeClient:
         return models.ItemCategory(**response.json())
 
     @functools.lru_cache
-    def get_item_fling_effect(
-        self, item_fling_effect_id: str | int
-    ) -> models.ItemFlingEffect:
+    def get_item_fling_effect(self, item_fling_effect_id: str | int) -> models.ItemFlingEffect:
         """
         Query an item fling effect's data and return it organised in an ItemFlingEffect object.
 
@@ -545,9 +516,7 @@ class PokeClient:
             item_id=item_fling_effect_id, item_type="item-fling-effect"
         )
 
-        logger.debug(
-            f"Sending GET request for data for item fling effect with ID '{item_fling_effect_id}'"
-        )
+        logger.debug(f"Sending GET request for data for item fling effect with ID '{item_fling_effect_id}'")
         response: requests.Response = requests.get(item_fling_effect_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -567,9 +536,7 @@ class PokeClient:
             A pokedex.models.items.ItemPocket oject of the item's data.
         """
         self.validate_id(item_pocket_id)
-        item_pocket_query_url: str = self.format_query_url(
-            item_id=item_pocket_id, item_type="item-pocket"
-        )
+        item_pocket_query_url: str = self.format_query_url(item_id=item_pocket_id, item_type="item-pocket")
 
         logger.debug(f"Sending GET request for data for item pocket with ID '{item_pocket_id}'")
         response: requests.Response = requests.get(item_pocket_query_url, timeout=10)
@@ -725,9 +692,7 @@ class PokeClient:
             A pokedex.models.moves.MoveAilment oject of the item's data.
         """
         self.validate_id(move_ailment_id)
-        move_ailment_query_url: str = self.format_query_url(
-            item_id=move_ailment_id, item_type="move-ailment"
-        )
+        move_ailment_query_url: str = self.format_query_url(item_id=move_ailment_id, item_type="move-ailment")
 
         logger.debug(f"Sending GET request for data for move ailment with ID '{move_ailment_id}'")
         response: requests.Response = requests.get(move_ailment_query_url, timeout=10)
@@ -737,9 +702,7 @@ class PokeClient:
         return models.MoveAilment(**response.json())
 
     @functools.lru_cache
-    def get_move_battle_style(
-        self, move_battle_style_id: str | int
-    ) -> models.MoveBattleStyle:
+    def get_move_battle_style(self, move_battle_style_id: str | int) -> models.MoveBattleStyle:
         """
         Query a move battle style's data and return it organised in a MoveBattleStyle object.
 
@@ -755,9 +718,7 @@ class PokeClient:
             item_id=move_battle_style_id, item_type="move-battle-style"
         )
 
-        logger.debug(
-            f"Sending GET request for data for move battle style with ID '{move_battle_style_id}'"
-        )
+        logger.debug(f"Sending GET request for data for move battle style with ID '{move_battle_style_id}'")
         response: requests.Response = requests.get(move_battle_style_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -789,9 +750,7 @@ class PokeClient:
         return models.ModelName(**response.json())
 
     @functools.lru_cache
-    def get_move_damage_class(
-        self, move_damage_class_id: str | int
-    ) -> models.MoveDamageClass:
+    def get_move_damage_class(self, move_damage_class_id: str | int) -> models.MoveDamageClass:
         """
         Query a move damage class's data and return it organised in a MoveDamageClass object.
 
@@ -807,9 +766,7 @@ class PokeClient:
             item_id=move_damage_class_id, item_type="move-damage-class"
         )
 
-        logger.debug(
-            f"Sending GET request for data for move damage class with ID '{move_damage_class_id}'"
-        )
+        logger.debug(f"Sending GET request for data for move damage class with ID '{move_damage_class_id}'")
         response: requests.Response = requests.get(move_damage_class_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -817,9 +774,7 @@ class PokeClient:
         return models.MoveDamageClass(**response.json())
 
     @functools.lru_cache
-    def get_move_learn_method(
-        self, move_learn_method_id: str | int
-    ) -> models.MoveLearnMethod:
+    def get_move_learn_method(self, move_learn_method_id: str | int) -> models.MoveLearnMethod:
         """
         Query a move learn method's data and return it organised in a MoveLearnMethod object.
 
@@ -835,9 +790,7 @@ class PokeClient:
             item_id=move_learn_method_id, item_type="move-learn-method"
         )
 
-        logger.debug(
-            f"Sending GET request for data for move learn method with ID '{move_learn_method_id}'"
-        )
+        logger.debug(f"Sending GET request for data for move learn method with ID '{move_learn_method_id}'")
         response: requests.Response = requests.get(move_learn_method_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -857,9 +810,7 @@ class PokeClient:
             A pokedex.models.moves.MoveTarget oject of the item's data.
         """
         self.validate_id(move_target_id)
-        move_target_query_url: str = self.format_query_url(
-            item_id=move_target_id, item_type="move-target"
-        )
+        move_target_query_url: str = self.format_query_url(item_id=move_target_id, item_type="move-target")
 
         logger.debug(f"Sending GET request for data for move target with ID '{move_target_id}'")
         response: requests.Response = requests.get(move_target_query_url, timeout=10)
@@ -907,9 +858,7 @@ class PokeClient:
             item_id=characteristic_id, item_type="characteristic"
         )
 
-        logger.debug(
-            f"Sending GET request for data for characteristic with ID '{characteristic_id}'"
-        )
+        logger.debug(f"Sending GET request for data for characteristic with ID '{characteristic_id}'")
         response: requests.Response = requests.get(characteristic_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -929,9 +878,7 @@ class PokeClient:
             A pokedex.models.pokemon.EggGroup oject of the item's data.
         """
         self.validate_id(egg_group_id)
-        egg_group_query_url: str = self.format_query_url(
-            item_id=egg_group_id, item_type="egg-group"
-        )
+        egg_group_query_url: str = self.format_query_url(item_id=egg_group_id, item_type="egg-group")
 
         logger.debug(f"Sending GET request for data for egg group with ID '{egg_group_id}'")
         response: requests.Response = requests.get(egg_group_query_url, timeout=10)
@@ -974,9 +921,7 @@ class PokeClient:
             A pokedex.models.pokemon.GrowthRate oject of the item's data.
         """
         self.validate_id(growth_rate_id)
-        growth_rate_query_url: str = self.format_query_url(
-            item_id=growth_rate_id, item_type="growth-rate"
-        )
+        growth_rate_query_url: str = self.format_query_url(item_id=growth_rate_id, item_type="growth-rate")
 
         logger.debug(f"Sending GET request for data for growth rate with ID '{growth_rate_id}'")
         response: requests.Response = requests.get(growth_rate_query_url, timeout=10)
@@ -1023,9 +968,7 @@ class PokeClient:
             item_id=pokeathlon_stat_id, item_type="pokeathlon-stat"
         )
 
-        logger.debug(
-            f"Sending GET request for data for pokeathlon stat with ID '{pokeathlon_stat_id}'"
-        )
+        logger.debug(f"Sending GET request for data for pokeathlon stat with ID '{pokeathlon_stat_id}'")
         response: requests.Response = requests.get(pokeathlon_stat_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -1091,9 +1034,7 @@ class PokeClient:
             A pokedex.models.pokemon.PokemonForm oject of the item's data.
         """
         self.validate_id(pokemon_id)
-        pokemon_form_query_url: str = self.format_query_url(
-            item_id=pokemon_id, item_type="pokemon-form"
-        )
+        pokemon_form_query_url: str = self.format_query_url(item_id=pokemon_id, item_type="pokemon-form")
 
         logger.debug(f"Sending GET request for data for pokemon form with ID '{pokemon_id}'")
         response: requests.Response = requests.get(pokemon_form_query_url, timeout=10)
@@ -1119,9 +1060,7 @@ class PokeClient:
             item_id=pokemon_habitat_id, item_type="pokemon-habitat"
         )
 
-        logger.debug(
-            f"Sending GET request for data for pokemon habitat with ID '{pokemon_habitat_id}'"
-        )
+        logger.debug(f"Sending GET request for data for pokemon habitat with ID '{pokemon_habitat_id}'")
         response: requests.Response = requests.get(pokemon_habitat_query_url, timeout=10)
         self.validate_response_status(response)
 
@@ -1169,9 +1108,7 @@ class PokeClient:
             item_id=pokemon_species_id, item_type="pokemon-species"
         )
 
-        logger.debug(
-            f"Sending GET request for data for pokemon species with ID '{pokemon_species_id}'"
-        )
+        logger.debug(f"Sending GET request for data for pokemon species with ID '{pokemon_species_id}'")
         response: requests.Response = requests.get(pokemon_species_query_url, timeout=10)
         self.validate_response_status(response)
 
