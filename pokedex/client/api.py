@@ -84,7 +84,7 @@ class PokeClient:
         berry_query_url: str = self.format_query_url(item_id=berry_id, item_type="berry")
 
         logger.debug(f"Sending GET request for data for berry with ID '{berry_id}'")
-        response: requests.Response = requests.get(berry_query_url)
+        response: requests.Response = requests.get(berry_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting berry data into Berry object")
@@ -110,7 +110,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for berry firmness with ID '{berry_firmness_id}'"
         )
-        response: requests.Response = requests.get(berry_firmness_query_url)
+        response: requests.Response = requests.get(berry_firmness_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting berry firmness data into BerryFirmness object")
@@ -134,7 +134,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for berry flavor with ID '{berry_flavor_id}'")
-        response: requests.Response = requests.get(berry_flavor_query_url)
+        response: requests.Response = requests.get(berry_flavor_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting berry flavor data into BerryFlavor object")
@@ -158,7 +158,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for contest type with ID '{contest_type_id}'")
-        response: requests.Response = requests.get(contest_type_query_url)
+        response: requests.Response = requests.get(contest_type_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting contest type data into ContestType object")
@@ -184,7 +184,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for contest effect with ID '{contest_effect_id}'"
         )
-        response: requests.Response = requests.get(contest_effect_query_url)
+        response: requests.Response = requests.get(contest_effect_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting contest effect data into ContestEffect object")
@@ -213,7 +213,7 @@ class PokeClient:
             f"Sending GET request for data for super contest effect with ID "
             f"'{super_contest_effect_id}'"
         )
-        response: requests.Response = requests.get(super_contest_effect_query_url)
+        response: requests.Response = requests.get(super_contest_effect_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting super contest effect data into SuperContestEffect object")
@@ -239,7 +239,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for encounter method with ID '{encounter_method_id}'"
         )
-        response: requests.Response = requests.get(encounter_method_query_url)
+        response: requests.Response = requests.get(encounter_method_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting encounter method data into EncounterMedhod object")
@@ -268,7 +268,7 @@ class PokeClient:
             f"Sending GET request for data for encounter condition with ID "
             f"'{encounter_condition_id}'"
         )
-        response: requests.Response = requests.get(encounter_condition_query_url)
+        response: requests.Response = requests.get(encounter_condition_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting encounter condition data into EncounterCondition object")
@@ -298,7 +298,7 @@ class PokeClient:
             f"Sending GET request for data for encounter condition value with ID "
             f"'{encounter_condition_id}'"
         )
-        response: requests.Response = requests.get(encounter_condition_value_query_url)
+        response: requests.Response = requests.get(encounter_condition_value_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace(
@@ -326,7 +326,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for evolution chain with ID '{evolution_chain_id}'"
         )
-        response: requests.Response = requests.get(evolution_chain_query_url)
+        response: requests.Response = requests.get(evolution_chain_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting evolution chain data into EvolutionChain object")
@@ -354,7 +354,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for evolution trigger with ID '{evolution_trigger_id}'"
         )
-        response: requests.Response = requests.get(evolution_trigger_query_url)
+        response: requests.Response = requests.get(evolution_trigger_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting evolution trigger data into EvolutionTrigger object")
@@ -378,7 +378,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for generation with ID '{generation_id}'")
-        response: requests.Response = requests.get(generation_query_url)
+        response: requests.Response = requests.get(generation_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting generation data into Generation object")
@@ -400,7 +400,7 @@ class PokeClient:
         pokedex_query_url: str = self.format_query_url(item_id=pokedex_id, item_type="pokedex")
 
         logger.debug(f"Sending GET request for data for pokedex with ID '{pokedex_id}'")
-        response: requests.Response = requests.get(pokedex_query_url)
+        response: requests.Response = requests.get(pokedex_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting pokedex data into Pokedex object")
@@ -422,7 +422,7 @@ class PokeClient:
         version_query_url: str = self.format_query_url(item_id=version_id, item_type="version")
 
         logger.debug(f"Sending GET request for data for version with ID '{version_id}'")
-        response: requests.Response = requests.get(version_query_url)
+        response: requests.Response = requests.get(version_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting version data into Version object")
@@ -446,7 +446,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for version group with ID '{version_group_id}'")
-        response: requests.Response = requests.get(version_group_query_url)
+        response: requests.Response = requests.get(version_group_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting version group data into VersionGroup object")
@@ -467,7 +467,7 @@ class PokeClient:
         item_query_url: str = self.format_query_url(item_id=item_id, item_type="item")
 
         logger.debug(f"Sending GET request for data for item with ID '{item_id}'")
-        response: requests.Response = requests.get(item_query_url)
+        response: requests.Response = requests.get(item_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting item data into Item object")
@@ -493,7 +493,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for item attribute with ID '{item_attribute_id}'"
         )
-        response: requests.Response = requests.get(item_attribute_query_url)
+        response: requests.Response = requests.get(item_attribute_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting item attribute data into ItemAttribute object")
@@ -517,7 +517,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for item category with ID '{item_category_id}'")
-        response: requests.Response = requests.get(item_category_query_url)
+        response: requests.Response = requests.get(item_category_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting item category data into ItemCategory object")
@@ -545,7 +545,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for item fling effect with ID '{item_fling_effect_id}'"
         )
-        response: requests.Response = requests.get(item_fling_effect_query_url)
+        response: requests.Response = requests.get(item_fling_effect_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting item fling effect data into ItemFlingEffect object")
@@ -569,7 +569,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for item pocket with ID '{item_pocket_id}'")
-        response: requests.Response = requests.get(item_pocket_query_url)
+        response: requests.Response = requests.get(item_pocket_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting item pocket data into ItemPocket object")
@@ -591,7 +591,7 @@ class PokeClient:
         location_query_url: str = self.format_query_url(item_id=location_id, item_type="location")
 
         logger.debug(f"Sending GET request for data for location with ID '{location_id}'")
-        response: requests.Response = requests.get(location_query_url)
+        response: requests.Response = requests.get(location_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting location data into Location object")
@@ -615,7 +615,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for location area with ID '{location_area_id}'")
-        response: requests.Response = requests.get(location_area_query_url)
+        response: requests.Response = requests.get(location_area_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting location area data into LocationArea object")
@@ -639,7 +639,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for pal park area with ID '{pal_park_area_id}'")
-        response: requests.Response = requests.get(pal_park_area_query_url)
+        response: requests.Response = requests.get(pal_park_area_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting pal park area data into Location object")
@@ -660,7 +660,7 @@ class PokeClient:
         region_query_url: str = self.format_query_url(item_id=region_id, item_type="region")
 
         logger.debug(f"Sending GET request for data for region with ID '{region_id}'")
-        response: requests.Response = requests.get(region_query_url)
+        response: requests.Response = requests.get(region_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting region data into Region object")
@@ -682,7 +682,7 @@ class PokeClient:
         machine_query_url: str = self.format_query_url(item_id=machine_id, item_type="machine")
 
         logger.debug(f"Sending GET request for data for machine with ID '{machine_id}'")
-        response: requests.Response = requests.get(machine_query_url)
+        response: requests.Response = requests.get(machine_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting machine data into Machine object")
@@ -703,7 +703,7 @@ class PokeClient:
         move_query_url: str = self.format_query_url(item_id=move_id, item_type="move")
 
         logger.debug(f"Sending GET request for data for move with ID '{move_id}'")
-        response: requests.Response = requests.get(move_query_url)
+        response: requests.Response = requests.get(move_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting move data into Move object")
@@ -727,7 +727,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for move ailment with ID '{move_ailment_id}'")
-        response: requests.Response = requests.get(move_ailment_query_url)
+        response: requests.Response = requests.get(move_ailment_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting move ailment data into MoveAilment object")
@@ -755,7 +755,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for move battle style with ID '{move_battle_style_id}'"
         )
-        response: requests.Response = requests.get(move_battle_style_query_url)
+        response: requests.Response = requests.get(move_battle_style_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting move battle style data into MoveBattleStyle object")
@@ -779,7 +779,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for move category with ID '{move_category_id}'")
-        response: requests.Response = requests.get(move_category_query_url)
+        response: requests.Response = requests.get(move_category_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting move category data into ModelName object")
@@ -807,7 +807,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for move damage class with ID '{move_damage_class_id}'"
         )
-        response: requests.Response = requests.get(move_damage_class_query_url)
+        response: requests.Response = requests.get(move_damage_class_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting move damage class data into MoveDamageClass object")
@@ -835,7 +835,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for move learn method with ID '{move_learn_method_id}'"
         )
-        response: requests.Response = requests.get(move_learn_method_query_url)
+        response: requests.Response = requests.get(move_learn_method_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting move learn method data into MoveLearnMethod object")
@@ -859,7 +859,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for move target with ID '{move_target_id}'")
-        response: requests.Response = requests.get(move_target_query_url)
+        response: requests.Response = requests.get(move_target_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting move target data into Move object")
@@ -881,7 +881,7 @@ class PokeClient:
         ability_query_url: str = self.format_query_url(item_id=ability_id, item_type="ability")
 
         logger.debug(f"Sending GET request for data for ability with ID '{ability_id}'")
-        response: requests.Response = requests.get(ability_query_url)
+        response: requests.Response = requests.get(ability_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting ability data into Ability")
@@ -907,7 +907,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for characteristic with ID '{characteristic_id}'"
         )
-        response: requests.Response = requests.get(characteristic_query_url)
+        response: requests.Response = requests.get(characteristic_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting characteristic data into Characteristic")
@@ -931,7 +931,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for egg group with ID '{egg_group_id}'")
-        response: requests.Response = requests.get(egg_group_query_url)
+        response: requests.Response = requests.get(egg_group_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting egg group data into EggGroup")
@@ -952,7 +952,7 @@ class PokeClient:
         gender_query_url: str = self.format_query_url(item_id=gender_id, item_type="gender")
 
         logger.debug(f"Sending GET request for data for gender with ID '{gender_id}'")
-        response: requests.Response = requests.get(gender_query_url)
+        response: requests.Response = requests.get(gender_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting gender data into Gender object")
@@ -976,7 +976,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for growth rate with ID '{growth_rate_id}'")
-        response: requests.Response = requests.get(growth_rate_query_url)
+        response: requests.Response = requests.get(growth_rate_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting growth rate data into GrowthRate object")
@@ -997,7 +997,7 @@ class PokeClient:
         nature_query_url: str = self.format_query_url(item_id=nature_id, item_type="nature")
 
         logger.debug(f"Sending GET request for data for nature with ID '{nature_id}'")
-        response: requests.Response = requests.get(nature_query_url)
+        response: requests.Response = requests.get(nature_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting nature data into Nature object")
@@ -1023,7 +1023,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for pokeathlon stat with ID '{pokeathlon_stat_id}'"
         )
-        response: requests.Response = requests.get(pokeathlon_stat_query_url)
+        response: requests.Response = requests.get(pokeathlon_stat_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting pokeathlon stat data into PokeathlonStat object")
@@ -1045,7 +1045,7 @@ class PokeClient:
         pokemon_query_url: str = self.format_query_url(item_id=pokemon_id, item_type="pokemon")
 
         logger.debug(f"Sending GET request for data for pokemon with ID '{pokemon_id}'")
-        response: requests.Response = requests.get(pokemon_query_url)
+        response: requests.Response = requests.get(pokemon_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting pokemon data into Pokemon object")
@@ -1069,7 +1069,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for pokemon color with ID '{pokemon_color_id}'")
-        response: requests.Response = requests.get(pokemon_color_query_url)
+        response: requests.Response = requests.get(pokemon_color_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting pokemon color data into PokemonColor object")
@@ -1093,7 +1093,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for pokemon form with ID '{pokemon_id}'")
-        response: requests.Response = requests.get(pokemon_form_query_url)
+        response: requests.Response = requests.get(pokemon_form_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting pokemon form data into PokemonForm object")
@@ -1119,7 +1119,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for pokemon habitat with ID '{pokemon_habitat_id}'"
         )
-        response: requests.Response = requests.get(pokemon_habitat_query_url)
+        response: requests.Response = requests.get(pokemon_habitat_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting pokemon habitat data into PokemonHabitat object")
@@ -1143,7 +1143,7 @@ class PokeClient:
         )
 
         logger.debug(f"Sending GET request for data for pokemon shape with ID '{pokemon_shape_id}'")
-        response: requests.Response = requests.get(pokemon_shape_query_url)
+        response: requests.Response = requests.get(pokemon_shape_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting pokemon shape data into PokemonShape object")
@@ -1169,7 +1169,7 @@ class PokeClient:
         logger.debug(
             f"Sending GET request for data for pokemon species with ID '{pokemon_species_id}'"
         )
-        response: requests.Response = requests.get(pokemon_species_query_url)
+        response: requests.Response = requests.get(pokemon_species_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting pokemon species data into PokemonSpecies object")
@@ -1190,7 +1190,7 @@ class PokeClient:
         stat_query_url: str = self.format_query_url(item_id=stat_id, item_type="stat")
 
         logger.debug(f"Sending GET request for data for stat with ID '{stat_id}'")
-        response: requests.Response = requests.get(stat_query_url)
+        response: requests.Response = requests.get(stat_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting stat data into Stat object")
@@ -1211,7 +1211,7 @@ class PokeClient:
         type_query_url: str = self.format_query_url(item_id=type_id, item_type="type")
 
         logger.debug(f"Sending GET request for data for type with ID '{type_id}'")
-        response: requests.Response = requests.get(type_query_url)
+        response: requests.Response = requests.get(type_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting type data into Type object")
@@ -1233,7 +1233,7 @@ class PokeClient:
         language_query_url: str = self.format_query_url(item_id=language_id, item_type="language")
 
         logger.debug(f"Sending GET request for data for language with ID '{language_id}'")
-        response: requests.Response = requests.get(language_query_url)
+        response: requests.Response = requests.get(language_query_url, timeout=10)
         self.validate_response_status(response)
 
         logger.trace("Formatting language data into Language object")

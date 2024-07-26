@@ -6,7 +6,7 @@ Model classes for the 'Evolution' endpoint objects. Available endpoints are:
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict
+from typing import TYPE_CHECKING
 
 from pydantic import BaseModel
 
@@ -39,7 +39,7 @@ class ChainLink(BaseModel):
     is_baby: bool
     species: NamedAPIResource | None
     evolution_details: list[EvolutionDetail]
-    evolves_to: list[Dict]  # technically is list[ChainLink] but that would NameError
+    evolves_to: list[dict]  # technically is list[ChainLink] but that would NameError
 
 
 class EvolutionChain(BaseModel):
