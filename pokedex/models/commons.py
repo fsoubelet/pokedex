@@ -1,8 +1,9 @@
 """
 Model classes for the 'Utility' objects.
 """
+from __future__ import annotations
 
-from typing import List, Optional
+from typing import List
 
 from pydantic import BaseModel
 
@@ -14,7 +15,7 @@ class NamedAPIResource(BaseModel):
 
 class Name(BaseModel):
     name: str
-    language: Optional[NamedAPIResource]
+    language: NamedAPIResource | None
 
 
 class Language(BaseModel):
@@ -34,12 +35,12 @@ class APIResource(BaseModel):
 
 class Description(BaseModel):
     description: str
-    language: Optional[NamedAPIResource]
+    language: NamedAPIResource | None
 
 
 class Effect(BaseModel):
     effect: str
-    language: Optional[NamedAPIResource]
+    language: NamedAPIResource | None
 
 
 class Encounter(BaseModel):
@@ -47,43 +48,43 @@ class Encounter(BaseModel):
     max_level: int
     condition_values: List[NamedAPIResource]
     chance: int
-    method: Optional[NamedAPIResource]
+    method: NamedAPIResource | None
 
 
 class FlavorText(BaseModel):
     flavor_text: str
-    language: Optional[NamedAPIResource]
-    version: Optional[NamedAPIResource]
+    language: NamedAPIResource | None
+    version: NamedAPIResource | None
 
 
 class GenerationGameIndex(BaseModel):
     game_index: int
-    generation: Optional[NamedAPIResource]
+    generation: NamedAPIResource | None
 
 
 class MachineVersionDetail(BaseModel):
     machine: APIResource
-    version_group: Optional[NamedAPIResource]
+    version_group: NamedAPIResource | None
 
 
 class VerboseEffect(BaseModel):
     effect: str
     short_effect: str
-    language: Optional[NamedAPIResource]
+    language: NamedAPIResource | None
 
 
 class VersionEncounterDetail(BaseModel):
-    version: Optional[NamedAPIResource]
+    version: NamedAPIResource | None
     max_chance: int
     encounter_details: List[Encounter]
 
 
 class VersionGameIndex(BaseModel):
     game_index: int
-    version: Optional[NamedAPIResource]
+    version: NamedAPIResource | None
 
 
 class VersionGroupFlavorText(BaseModel):
     text: str
-    language: Optional[NamedAPIResource]
-    version_group: Optional[NamedAPIResource]
+    language: NamedAPIResource | None
+    version_group: NamedAPIResource | None

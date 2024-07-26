@@ -8,8 +8,9 @@ Model classes for the 'Moves' endpoint objects. Available endpoints are:
 - Move Learn Methods (https://pokeapi.co/api/v2/move-learn-method/{id or name}/)
 - Move Targets (https://pokeapi.co/api/v2/move-target/{id or name}/)
 """
+from __future__ import annotations
 
-from typing import List, Optional
+from typing import List
 
 from pydantic import BaseModel
 
@@ -25,8 +26,8 @@ from pokedex.models.pokemon import AbilityEffectChange
 
 
 class ContestComboDetail(BaseModel):
-    use_before: Optional[List[NamedAPIResource]]
-    use_after: Optional[List[NamedAPIResource]]
+    use_before: List[NamedAPIResource] | None
+    use_after: List[NamedAPIResource] | None
 
 
 class ContestComboSets(BaseModel):
@@ -36,17 +37,17 @@ class ContestComboSets(BaseModel):
 
 class MoveFlavorText(BaseModel):
     flavor_text: str
-    language: Optional[NamedAPIResource]
-    version_group: Optional[NamedAPIResource]
+    language: NamedAPIResource | None
+    version_group: NamedAPIResource | None
 
 
 class MoveMetaData(BaseModel):
-    ailment: Optional[NamedAPIResource]
-    category: Optional[NamedAPIResource]
-    min_hits: Optional[int]
-    max_hits: Optional[int]
-    min_turns: Optional[int]
-    max_turns: Optional[int]
+    ailment: NamedAPIResource | None
+    category: NamedAPIResource | None
+    min_hits: int | None
+    max_hits: int | None
+    min_turns: int | None
+    max_turns: int | None
     drain: int
     healing: int
     crit_rate: int
@@ -56,18 +57,18 @@ class MoveMetaData(BaseModel):
 
 
 class PastMoveStatValues(BaseModel):
-    accuracy: Optional[int]
-    effect_chance: Optional[int]
-    power: Optional[int]
-    pp: Optional[int]
+    accuracy: int | None
+    effect_chance: int | None
+    power: int | None
+    pp: int | None
     effect_entries: List[VerboseEffect]
-    type: Optional[NamedAPIResource]
-    version_group: Optional[NamedAPIResource]
+    type: NamedAPIResource | None
+    version_group: NamedAPIResource | None
 
 
 class MoveStatChange(BaseModel):
     change: int
-    stat: Optional[NamedAPIResource]
+    stat: NamedAPIResource | None
 
 
 class Move(BaseModel):
@@ -79,27 +80,27 @@ class Move(BaseModel):
 
     id: int
     name: str
-    accuracy: Optional[int]
-    effect_chance: Optional[int]
+    accuracy: int | None
+    effect_chance: int | None
     pp: int
     priority: int
-    power: Optional[int]
-    contest_combos: Optional[ContestComboSets]
-    contest_type: Optional[NamedAPIResource]
-    contest_effect: Optional[APIResource]
-    damage_class: Optional[NamedAPIResource]
+    power: int | None
+    contest_combos: ContestComboSets | None
+    contest_type: NamedAPIResource | None
+    contest_effect: APIResource | None
+    damage_class: NamedAPIResource | None
     effect_entries: List[VerboseEffect]
     effect_changes: List[AbilityEffectChange]
     flavor_text_entries: List[MoveFlavorText]
-    generation: Optional[NamedAPIResource]
+    generation: NamedAPIResource | None
     machines: List[MachineVersionDetail]
     meta: MoveMetaData
     names: List[Name]
     past_values: List[PastMoveStatValues]
     stat_changes: List[MoveStatChange]
-    super_contest_effect: Optional[APIResource]
-    target: Optional[NamedAPIResource]
-    type: Optional[NamedAPIResource]
+    super_contest_effect: APIResource | None
+    target: NamedAPIResource | None
+    type: NamedAPIResource | None
 
 
 class MoveAilment(BaseModel):

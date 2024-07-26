@@ -5,7 +5,9 @@ Model classes for the 'Berries' endpoint objects. Available endpoints are:
 - Berry Flavors (https://pokeapi.co/api/v2/berry-flavor/{id or name}/)
 """
 
-from typing import List, Optional
+from __future__ import annotations
+
+from typing import List
 
 from pydantic import BaseModel
 
@@ -14,7 +16,7 @@ from pokedex.models.commons import Name, NamedAPIResource
 
 class BerryFlavorMap(BaseModel):
     potency: int
-    flavor: Optional[NamedAPIResource]
+    flavor: NamedAPIResource | None
 
 
 class Berry(BaseModel):
@@ -31,10 +33,10 @@ class Berry(BaseModel):
     size: int
     smoothness: int
     soil_dryness: int
-    firmness: Optional[NamedAPIResource]
+    firmness: NamedAPIResource | None
     flavors: List[BerryFlavorMap]
-    item: Optional[NamedAPIResource]
-    natural_gift_type: Optional[NamedAPIResource]
+    item: NamedAPIResource | None
+    natural_gift_type: NamedAPIResource | None
 
 
 class BerryFirmness(BaseModel):
@@ -48,7 +50,7 @@ class BerryFirmness(BaseModel):
 
 class FlavorBerryMap(BaseModel):
     potency: int
-    berry: Optional[NamedAPIResource]
+    berry: NamedAPIResource | None
 
 
 class BerryFlavor(BaseModel):
@@ -60,5 +62,5 @@ class BerryFlavor(BaseModel):
     id: int
     name: str
     berries: List[FlavorBerryMap]
-    contest_type: Optional[NamedAPIResource]
+    contest_type: NamedAPIResource | None
     names: List[Name]

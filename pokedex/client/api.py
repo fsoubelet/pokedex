@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import functools
-from typing import Union
 
 import requests
 from loguru import logger
@@ -18,12 +19,12 @@ class PokeClient:
     def __init__(self):
         self.base_url: str = "https://pokeapi.co/api/v2/"
 
-    def format_query_url(self, item_id: Union[str, int], item_type: str) -> str:
+    def format_query_url(self, item_id: str | int, item_type: str) -> str:
         """
         Returns the PokeAPI url to send a GET request to for a specific pokemon's information.
 
         Args:
-            item_id (Union[str, int]): the item's identifier, either its ID number or its name.
+            item_id (str | int): the item's identifier, either its ID number or its name.
             item_type (str): the item's type, either a pokemon or a berry, etc.
 
         Returns:
@@ -33,17 +34,17 @@ class PokeClient:
         return f"{self.base_url}/{item_type}/{item_id}/"
 
     @staticmethod
-    def validate_id(provided_id: Union[str, int]) -> None:
+    def validate_id(provided_id: str | int) -> None:
         """
         Checks the validity of the provided ID for use in PokeAPI: should be integer or string.
 
         Args:
-            provided_id (Union[str, int]): the identifier to use in a query.
+            provided_id (str | int): the identifier to use in a query.
 
         Returns:
             Nothing, but will raise a TypeError if validation is unsuccessful.
         """
-        if not (isinstance(provided_id, str) or isinstance(provided_id, int)):
+        if not (isinstance(provided_id, (int, str))):
             logger.error(
                 f"The provided pokemon ID is of type '{type(provided_id)}' but should be "
                 f"either 'int' or 'string'"
@@ -68,13 +69,13 @@ class PokeClient:
                 f"address '{response.request.url}' check the validity of your parameter"
             )
 
-    @functools.lru_cache()
-    def get_berry(self, berry_id: Union[str, int]) -> models.Berry:
+    @functools.lru_cache
+    def get_berry(self, berry_id: str | int) -> models.Berry:
         """
         Query a berry's data and return it organised in a Berry object.
 
         Args:
-            berry_id (Union[str, int]): the berry's identifier, either its ID number or its name.
+            berry_id (str | int): the berry's identifier, either its ID number or its name.
 
         Returns:
             A pokedex.models.berries.Berry oject of the item's data.
@@ -86,16 +87,16 @@ class PokeClient:
         response: requests.Response = requests.get(berry_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting berry data into Berry object")
+        logger.trace("Formatting berry data into Berry object")
         return models.Berry(**response.json())
 
-    @functools.lru_cache()
-    def get_berry_firmness(self, berry_firmness_id: Union[str, int]) -> models.BerryFirmness:
+    @functools.lru_cache
+    def get_berry_firmness(self, berry_firmness_id: str | int) -> models.BerryFirmness:
         """
         Query a berry firmness's data and return it organised in a BerryFirmness object.
 
         Args:
-            berry_firmness_id (Union[str, int]): the berry firmness's identifier, either its ID
+            berry_firmness_id (str | int): the berry firmness's identifier, either its ID
                                                  number or its name.
 
         Returns:
@@ -112,16 +113,16 @@ class PokeClient:
         response: requests.Response = requests.get(berry_firmness_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting berry firmness data into BerryFirmness object")
+        logger.trace("Formatting berry firmness data into BerryFirmness object")
         return models.BerryFirmness(**response.json())
 
-    @functools.lru_cache()
-    def get_berry_flavor(self, berry_flavor_id: Union[str, int]) -> models.BerryFlavor:
+    @functools.lru_cache
+    def get_berry_flavor(self, berry_flavor_id: str | int) -> models.BerryFlavor:
         """
         Query a berry flavor's data and return it organised in a BerryFlavor object.
 
         Args:
-            berry_flavor_id (Union[str, int]): the berry flavor's identifier, either its ID number
+            berry_flavor_id (str | int): the berry flavor's identifier, either its ID number
                                                or its name.
 
         Returns:
@@ -136,16 +137,16 @@ class PokeClient:
         response: requests.Response = requests.get(berry_flavor_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting berry flavor data into BerryFlavor object")
+        logger.trace("Formatting berry flavor data into BerryFlavor object")
         return models.BerryFlavor(**response.json())
 
-    @functools.lru_cache()
-    def get_contest_type(self, contest_type_id: Union[str, int]) -> models.ContestType:
+    @functools.lru_cache
+    def get_contest_type(self, contest_type_id: str | int) -> models.ContestType:
         """
         Query a contest type's data and return it organised in a ContestType object.
 
         Args:
-            contest_type_id (Union[str, int]): the contest type's identifier, either its ID number
+            contest_type_id (str | int): the contest type's identifier, either its ID number
                                                or its name.
 
         Returns:
@@ -160,16 +161,16 @@ class PokeClient:
         response: requests.Response = requests.get(contest_type_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting contest type data into ContestType object")
+        logger.trace("Formatting contest type data into ContestType object")
         return models.ContestType(**response.json())
 
-    @functools.lru_cache()
-    def get_contest_effect(self, contest_effect_id: Union[str, int]) -> models.ContestEffect:
+    @functools.lru_cache
+    def get_contest_effect(self, contest_effect_id: str | int) -> models.ContestEffect:
         """
         Query a contest effect's data and return it organised in a ContestEffect object.
 
         Args:
-            contest_effect_id (Union[str, int]): the contest effect's identifier, either its ID
+            contest_effect_id (str | int): the contest effect's identifier, either its ID
                                                  number or its name.
 
         Returns:
@@ -186,18 +187,18 @@ class PokeClient:
         response: requests.Response = requests.get(contest_effect_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting contest effect data into ContestEffect object")
+        logger.trace("Formatting contest effect data into ContestEffect object")
         return models.ContestEffect(**response.json())
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def get_super_contest_effect(
-        self, super_contest_effect_id: Union[str, int]
+        self, super_contest_effect_id: str | int
     ) -> models.SuperContestEffect:
         """
         Query a super contest effect's data and return it organised in a SuperContestEffect object.
 
         Args:
-            super_contest_effect_id (Union[str, int]): the contest effect's identifier, either its
+            super_contest_effect_id (str | int): the contest effect's identifier, either its
                                                        ID number or its name.
 
         Returns:
@@ -215,16 +216,16 @@ class PokeClient:
         response: requests.Response = requests.get(super_contest_effect_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting super contest effect data into SuperContestEffect object")
+        logger.trace("Formatting super contest effect data into SuperContestEffect object")
         return models.SuperContestEffect(**response.json())
 
-    @functools.lru_cache()
-    def get_encounter_method(self, encounter_method_id: Union[str, int]) -> models.EncounterMethod:
+    @functools.lru_cache
+    def get_encounter_method(self, encounter_method_id: str | int) -> models.EncounterMethod:
         """
         Query an encounter method's data and return it organised in an EncounterMethod object.
 
         Args:
-            encounter_method_id (Union[str, int]): the encounter method's identifier, either its ID
+            encounter_method_id (str | int): the encounter method's identifier, either its ID
                                                    number or its name.
 
         Returns:
@@ -241,18 +242,18 @@ class PokeClient:
         response: requests.Response = requests.get(encounter_method_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting encounter method data into EncounterMedhod object")
+        logger.trace("Formatting encounter method data into EncounterMedhod object")
         return models.EncounterMethod(**response.json())
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def get_encounter_condition(
-        self, encounter_condition_id: Union[str, int]
+        self, encounter_condition_id: str | int
     ) -> models.EncounterCondition:
         """
         Query an encounter condition's data and return it organised in an EncounterCondition object.
 
         Args:
-            encounter_condition_id (Union[str, int]): the encounter condition's identifier,
+            encounter_condition_id (str | int): the encounter condition's identifier,
                                                       either its ID number or its name.
 
         Returns:
@@ -270,19 +271,19 @@ class PokeClient:
         response: requests.Response = requests.get(encounter_condition_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting encounter condition data into EncounterCondition object")
+        logger.trace("Formatting encounter condition data into EncounterCondition object")
         return models.EncounterCondition(**response.json())
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def get_encounter_condition_value(
-        self, encounter_condition_id: Union[str, int]
+        self, encounter_condition_id: str | int
     ) -> models.EncounterConditionValue:
         """
         Query an encounter condition value's data and return it organised in an
         EncounterConditionValue object.
 
         Args:
-            encounter_condition_id (Union[str, int]): the encounter condition value's identifier,
+            encounter_condition_id (str | int): the encounter condition value's identifier,
                                                       either its ID number or its name.
 
         Returns:
@@ -301,17 +302,17 @@ class PokeClient:
         self.validate_response_status(response)
 
         logger.trace(
-            f"Formatting encounter condition value data into EncounterConditionValue " f"object"
+            "Formatting encounter condition value data into EncounterConditionValue " "object"
         )
         return models.EncounterConditionValue(**response.json())
 
-    @functools.lru_cache()
-    def get_evolution_chain(self, evolution_chain_id: Union[str, int]) -> models.EvolutionChain:
+    @functools.lru_cache
+    def get_evolution_chain(self, evolution_chain_id: str | int) -> models.EvolutionChain:
         """
         Query an evolution chain's data and return it organised in an EvolutionChain object.
 
         Args:
-            evolution_chain_id (Union[str, int]): the evolution chain's identifier, either its ID
+            evolution_chain_id (str | int): the evolution chain's identifier, either its ID
                                                   number or its name.
 
         Returns:
@@ -328,18 +329,18 @@ class PokeClient:
         response: requests.Response = requests.get(evolution_chain_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting evolution chain data into EvolutionChain object")
+        logger.trace("Formatting evolution chain data into EvolutionChain object")
         return models.EvolutionChain(**response.json())
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def get_evolution_trigger(
-        self, evolution_trigger_id: Union[str, int]
+        self, evolution_trigger_id: str | int
     ) -> models.EvolutionTrigger:
         """
         Query an evolution trigger's data and return it organised in an EvolutionTrigger object.
 
         Args:
-            evolution_trigger_id (Union[str, int]): the evolution trigger's identifier,
+            evolution_trigger_id (str | int): the evolution trigger's identifier,
                                                     either its ID number or its name.
 
         Returns:
@@ -356,16 +357,16 @@ class PokeClient:
         response: requests.Response = requests.get(evolution_trigger_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting evolution trigger data into EvolutionTrigger object")
+        logger.trace("Formatting evolution trigger data into EvolutionTrigger object")
         return models.EvolutionTrigger(**response.json())
 
-    @functools.lru_cache()
-    def get_generation(self, generation_id: Union[str, int]) -> models.Generation:
+    @functools.lru_cache
+    def get_generation(self, generation_id: str | int) -> models.Generation:
         """
         Query a generation's data and return it organised in a Generation object.
 
         Args:
-            generation_id (Union[str, int]): the generation's identifier, either its ID number or
+            generation_id (str | int): the generation's identifier, either its ID number or
                                              its name.
 
         Returns:
@@ -380,16 +381,16 @@ class PokeClient:
         response: requests.Response = requests.get(generation_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting generation data into Generation object")
+        logger.trace("Formatting generation data into Generation object")
         return models.Generation(**response.json())
 
-    @functools.lru_cache()
-    def get_pokedex(self, pokedex_id: Union[str, int]) -> models.Pokedex:
+    @functools.lru_cache
+    def get_pokedex(self, pokedex_id: str | int) -> models.Pokedex:
         """
         Query a pokedex's data and return it organised in a Pokedex object.
 
         Args:
-            pokedex_id (Union[str, int]): the pokedex's identifier, either its ID number or
+            pokedex_id (str | int): the pokedex's identifier, either its ID number or
                                           its name.
 
         Returns:
@@ -402,16 +403,16 @@ class PokeClient:
         response: requests.Response = requests.get(pokedex_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting pokedex data into Pokedex object")
+        logger.trace("Formatting pokedex data into Pokedex object")
         return models.Pokedex(**response.json())
 
-    @functools.lru_cache()
-    def get_version(self, version_id: Union[str, int]) -> models.Version:
+    @functools.lru_cache
+    def get_version(self, version_id: str | int) -> models.Version:
         """
         Query a version's data and return it organised in a Version object.
 
         Args:
-            version_id (Union[str, int]): the version's identifier, either its ID number or
+            version_id (str | int): the version's identifier, either its ID number or
                                           its name.
 
         Returns:
@@ -424,16 +425,16 @@ class PokeClient:
         response: requests.Response = requests.get(version_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting version data into Version object")
+        logger.trace("Formatting version data into Version object")
         return models.Version(**response.json())
 
-    @functools.lru_cache()
-    def get_version_group(self, version_group_id: Union[str, int]) -> models.VersionGroup:
+    @functools.lru_cache
+    def get_version_group(self, version_group_id: str | int) -> models.VersionGroup:
         """
         Query a version group's data and return it organised in a VersionGroup object.
 
         Args:
-            version_group_id (Union[str, int]): the version group's identifier, either its ID
+            version_group_id (str | int): the version group's identifier, either its ID
                                                 number or its name.
 
         Returns:
@@ -448,16 +449,16 @@ class PokeClient:
         response: requests.Response = requests.get(version_group_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting version group data into VersionGroup object")
+        logger.trace("Formatting version group data into VersionGroup object")
         return models.VersionGroup(**response.json())
 
-    @functools.lru_cache()
-    def get_item(self, item_id: Union[str, int]) -> models.Item:
+    @functools.lru_cache
+    def get_item(self, item_id: str | int) -> models.Item:
         """
         Query an item's data and return it organised in an Item object.
 
         Args:
-            item_id (Union[str, int]): the item's identifier, either its ID number or its name.
+            item_id (str | int): the item's identifier, either its ID number or its name.
 
         Returns:
             A pokedex.models.items.Item oject of the item's data.
@@ -469,16 +470,16 @@ class PokeClient:
         response: requests.Response = requests.get(item_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting item data into Item object")
+        logger.trace("Formatting item data into Item object")
         return models.Item(**response.json())
 
-    @functools.lru_cache()
-    def get_item_attribute(self, item_attribute_id: Union[str, int]) -> models.ItemAttribute:
+    @functools.lru_cache
+    def get_item_attribute(self, item_attribute_id: str | int) -> models.ItemAttribute:
         """
         Query an item attribute's data and return it organised in an ItemAttribute object.
 
         Args:
-            item_attribute_id (Union[str, int]): the item attribute's identifier, either its ID
+            item_attribute_id (str | int): the item attribute's identifier, either its ID
                                                  number or its name.
 
         Returns:
@@ -495,16 +496,16 @@ class PokeClient:
         response: requests.Response = requests.get(item_attribute_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting item attribute data into ItemAttribute object")
+        logger.trace("Formatting item attribute data into ItemAttribute object")
         return models.ItemAttribute(**response.json())
 
-    @functools.lru_cache()
-    def get_item_category(self, item_category_id: Union[str, int]) -> models.ItemCategory:
+    @functools.lru_cache
+    def get_item_category(self, item_category_id: str | int) -> models.ItemCategory:
         """
         Query an item category's data and return it organised in an ItemCategoru object.
 
         Args:
-            item_category_id (Union[str, int]): the item category's identifier, either its ID
+            item_category_id (str | int): the item category's identifier, either its ID
                                                 number or its name.
 
         Returns:
@@ -519,18 +520,18 @@ class PokeClient:
         response: requests.Response = requests.get(item_category_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting item category data into ItemCategory object")
+        logger.trace("Formatting item category data into ItemCategory object")
         return models.ItemCategory(**response.json())
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def get_item_fling_effect(
-        self, item_fling_effect_id: Union[str, int]
+        self, item_fling_effect_id: str | int
     ) -> models.ItemFlingEffect:
         """
         Query an item fling effect's data and return it organised in an ItemFlingEffect object.
 
         Args:
-            item_fling_effect_id (Union[str, int]): the item fling effect's identifier,
+            item_fling_effect_id (str | int): the item fling effect's identifier,
                                                     either its ID number or its name.
 
         Returns:
@@ -547,16 +548,16 @@ class PokeClient:
         response: requests.Response = requests.get(item_fling_effect_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting item fling effect data into ItemFlingEffect object")
+        logger.trace("Formatting item fling effect data into ItemFlingEffect object")
         return models.ItemFlingEffect(**response.json())
 
-    @functools.lru_cache()
-    def get_item_pocket(self, item_pocket_id: Union[str, int]) -> models.ItemPocket:
+    @functools.lru_cache
+    def get_item_pocket(self, item_pocket_id: str | int) -> models.ItemPocket:
         """
         Query an item pocket's data and return it organised in an ItemPocket object.
 
         Args:
-            item_pocket_id (Union[str, int]): the item pocket's identifier, either its ID number or
+            item_pocket_id (str | int): the item pocket's identifier, either its ID number or
                                               its name.
 
         Returns:
@@ -571,16 +572,16 @@ class PokeClient:
         response: requests.Response = requests.get(item_pocket_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting item pocket data into ItemPocket object")
+        logger.trace("Formatting item pocket data into ItemPocket object")
         return models.ItemPocket(**response.json())
 
-    @functools.lru_cache()
-    def get_location(self, location_id: Union[str, int]) -> models.Location:
+    @functools.lru_cache
+    def get_location(self, location_id: str | int) -> models.Location:
         """
         Query a location's data and return it organised in a Location object.
 
         Args:
-            location_id (Union[str, int]): the location's identifier, either its ID number or its
+            location_id (str | int): the location's identifier, either its ID number or its
                                            name.
 
         Returns:
@@ -593,16 +594,16 @@ class PokeClient:
         response: requests.Response = requests.get(location_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting location data into Location object")
+        logger.trace("Formatting location data into Location object")
         return models.Location(**response.json())
 
-    @functools.lru_cache()
-    def get_location_area(self, location_area_id: Union[str, int]) -> models.LocationArea:
+    @functools.lru_cache
+    def get_location_area(self, location_area_id: str | int) -> models.LocationArea:
         """
         Query a location area's data and return it organised in a LocationArea object.
 
         Args:
-            location_area_id (Union[str, int]): the location area's identifier, either its ID
+            location_area_id (str | int): the location area's identifier, either its ID
                                                 number or its name.
 
         Returns:
@@ -617,16 +618,16 @@ class PokeClient:
         response: requests.Response = requests.get(location_area_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting location area data into LocationArea object")
+        logger.trace("Formatting location area data into LocationArea object")
         return models.LocationArea(**response.json())
 
-    @functools.lru_cache()
-    def get_pal_park_area(self, pal_park_area_id: Union[str, int]) -> models.PalParkArea:
+    @functools.lru_cache
+    def get_pal_park_area(self, pal_park_area_id: str | int) -> models.PalParkArea:
         """
         Query a pal park area's data and return it organised in a PalParkArea object.
 
         Args:
-            pal_park_area_id (Union[str, int]): the pal park area's identifier, either its ID
+            pal_park_area_id (str | int): the pal park area's identifier, either its ID
                                                 number or its name.
 
         Returns:
@@ -641,16 +642,16 @@ class PokeClient:
         response: requests.Response = requests.get(pal_park_area_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting pal park area data into Location object")
+        logger.trace("Formatting pal park area data into Location object")
         return models.PalParkArea(**response.json())
 
-    @functools.lru_cache()
-    def get_region(self, region_id: Union[str, int]) -> models.Region:
+    @functools.lru_cache
+    def get_region(self, region_id: str | int) -> models.Region:
         """
         Query a region's data and return it organised in a Region object.
 
         Args:
-            region_id (Union[str, int]): the region's identifier, either its ID number or its name.
+            region_id (str | int): the region's identifier, either its ID number or its name.
 
         Returns:
             A pokedex.models.locations.Region oject of the item's data.
@@ -662,16 +663,16 @@ class PokeClient:
         response: requests.Response = requests.get(region_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting region data into Region object")
+        logger.trace("Formatting region data into Region object")
         return models.Region(**response.json())
 
-    @functools.lru_cache()
-    def get_machine(self, machine_id: Union[str, int]) -> models.Machine:
+    @functools.lru_cache
+    def get_machine(self, machine_id: str | int) -> models.Machine:
         """
         Query a machine's data and return it organised in a Machine object.
 
         Args:
-            machine_id (Union[str, int]): the machine's identifier, either its ID number or its
+            machine_id (str | int): the machine's identifier, either its ID number or its
                                           name.
 
         Returns:
@@ -684,16 +685,16 @@ class PokeClient:
         response: requests.Response = requests.get(machine_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting machine data into Machine object")
+        logger.trace("Formatting machine data into Machine object")
         return models.Machine(**response.json())
 
-    @functools.lru_cache()
-    def get_move(self, move_id: Union[str, int]) -> models.Move:
+    @functools.lru_cache
+    def get_move(self, move_id: str | int) -> models.Move:
         """
         Query a move's data and return it organised in a Move object.
 
         Args:
-            move_id (Union[str, int]): the move's identifier, either its ID number or its name.
+            move_id (str | int): the move's identifier, either its ID number or its name.
 
         Returns:
             A pokedex.models.moves.Move oject of the item's data.
@@ -705,16 +706,16 @@ class PokeClient:
         response: requests.Response = requests.get(move_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting move data into Move object")
+        logger.trace("Formatting move data into Move object")
         return models.Move(**response.json())
 
-    @functools.lru_cache()
-    def get_move_ailment(self, move_ailment_id: Union[str, int]) -> models.MoveAilment:
+    @functools.lru_cache
+    def get_move_ailment(self, move_ailment_id: str | int) -> models.MoveAilment:
         """
         Query a move ailment's data and return it organised in a MoveAilment object.
 
         Args:
-            move_ailment_id (Union[str, int]): the move ailment's identifier, either its ID number
+            move_ailment_id (str | int): the move ailment's identifier, either its ID number
                                                or its name.
 
         Returns:
@@ -729,18 +730,18 @@ class PokeClient:
         response: requests.Response = requests.get(move_ailment_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting move ailment data into MoveAilment object")
+        logger.trace("Formatting move ailment data into MoveAilment object")
         return models.MoveAilment(**response.json())
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def get_move_battle_style(
-        self, move_battle_style_id: Union[str, int]
+        self, move_battle_style_id: str | int
     ) -> models.MoveBattleStyle:
         """
         Query a move battle style's data and return it organised in a MoveBattleStyle object.
 
         Args:
-            move_battle_style_id (Union[str, int]): the move battle_style's identifier,
+            move_battle_style_id (str | int): the move battle_style's identifier,
                                                     either its ID number or its name.
 
         Returns:
@@ -757,16 +758,16 @@ class PokeClient:
         response: requests.Response = requests.get(move_battle_style_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting move battle style data into MoveBattleStyle object")
+        logger.trace("Formatting move battle style data into MoveBattleStyle object")
         return models.MoveBattleStyle(**response.json())
 
-    @functools.lru_cache()
-    def get_move_category(self, move_category_id: Union[str, int]) -> models.ModelName:
+    @functools.lru_cache
+    def get_move_category(self, move_category_id: str | int) -> models.ModelName:
         """
         Query a move category's data and return it organised in a ModelName object.
 
         Args:
-            move_category_id (Union[str, int]): the move category's identifier, either its ID
+            move_category_id (str | int): the move category's identifier, either its ID
                                                 number or its name.
 
         Returns:
@@ -781,18 +782,18 @@ class PokeClient:
         response: requests.Response = requests.get(move_category_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting move category data into ModelName object")
+        logger.trace("Formatting move category data into ModelName object")
         return models.ModelName(**response.json())
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def get_move_damage_class(
-        self, move_damage_class_id: Union[str, int]
+        self, move_damage_class_id: str | int
     ) -> models.MoveDamageClass:
         """
         Query a move damage class's data and return it organised in a MoveDamageClass object.
 
         Args:
-            move_damage_class_id (Union[str, int]): the move damage class's identifier,
+            move_damage_class_id (str | int): the move damage class's identifier,
                                                     either its ID number or its name.
 
         Returns:
@@ -809,18 +810,18 @@ class PokeClient:
         response: requests.Response = requests.get(move_damage_class_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting move damage class data into MoveDamageClass object")
+        logger.trace("Formatting move damage class data into MoveDamageClass object")
         return models.MoveDamageClass(**response.json())
 
-    @functools.lru_cache()
+    @functools.lru_cache
     def get_move_learn_method(
-        self, move_learn_method_id: Union[str, int]
+        self, move_learn_method_id: str | int
     ) -> models.MoveLearnMethod:
         """
         Query a move learn method's data and return it organised in a MoveLearnMethod object.
 
         Args:
-            move_learn_method_id (Union[str, int]): the move learn method's identifier,
+            move_learn_method_id (str | int): the move learn method's identifier,
                                                     either its ID number or its name.
 
         Returns:
@@ -837,16 +838,16 @@ class PokeClient:
         response: requests.Response = requests.get(move_learn_method_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting move learn method data into MoveLearnMethod object")
+        logger.trace("Formatting move learn method data into MoveLearnMethod object")
         return models.MoveLearnMethod(**response.json())
 
-    @functools.lru_cache()
-    def get_move_target(self, move_target_id: Union[str, int]) -> models.MoveTarget:
+    @functools.lru_cache
+    def get_move_target(self, move_target_id: str | int) -> models.MoveTarget:
         """
         Query a move target's data and return it organised in a MoveTarget object.
 
         Args:
-            move_target_id (Union[str, int]): the move target's identifier, either its ID number
+            move_target_id (str | int): the move target's identifier, either its ID number
                                               or its name.
 
         Returns:
@@ -861,16 +862,16 @@ class PokeClient:
         response: requests.Response = requests.get(move_target_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting move target data into Move object")
+        logger.trace("Formatting move target data into Move object")
         return models.MoveTarget(**response.json())
 
-    @functools.lru_cache()
-    def get_ability(self, ability_id: Union[str, int]) -> models.Ability:
+    @functools.lru_cache
+    def get_ability(self, ability_id: str | int) -> models.Ability:
         """
         Query an ability's data and return it organised in an Ability object.
 
         Args:
-            ability_id (Union[str, int]): the ability's identifier, either its ID number or its
+            ability_id (str | int): the ability's identifier, either its ID number or its
                                           name.
 
         Returns:
@@ -883,16 +884,16 @@ class PokeClient:
         response: requests.Response = requests.get(ability_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting ability data into Ability")
+        logger.trace("Formatting ability data into Ability")
         return models.Ability(**response.json())
 
-    @functools.lru_cache()
-    def get_characteristic(self, characteristic_id: Union[str, int]) -> models.Characteristic:
+    @functools.lru_cache
+    def get_characteristic(self, characteristic_id: str | int) -> models.Characteristic:
         """
         Query a characteristic's data and return it organised in a Characteristic object.
 
         Args:
-            characteristic_id (Union[str, int]): the characteristic's identifier, either its ID
+            characteristic_id (str | int): the characteristic's identifier, either its ID
                                                  number or its name.
 
         Returns:
@@ -909,16 +910,16 @@ class PokeClient:
         response: requests.Response = requests.get(characteristic_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting characteristic data into Characteristic")
+        logger.trace("Formatting characteristic data into Characteristic")
         return models.Characteristic(**response.json())
 
-    @functools.lru_cache()
-    def get_egg_group(self, egg_group_id: Union[str, int]) -> models.EggGroup:
+    @functools.lru_cache
+    def get_egg_group(self, egg_group_id: str | int) -> models.EggGroup:
         """
         Query an egg group's data and return it organised in an EggGroup object.
 
         Args:
-            egg_group_id (Union[str, int]): the egg group's identifier, either its ID number or its
+            egg_group_id (str | int): the egg group's identifier, either its ID number or its
                                             name.
 
         Returns:
@@ -933,16 +934,16 @@ class PokeClient:
         response: requests.Response = requests.get(egg_group_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting egg group data into EggGroup")
+        logger.trace("Formatting egg group data into EggGroup")
         return models.EggGroup(**response.json())
 
-    @functools.lru_cache()
-    def get_gender(self, gender_id: Union[str, int]) -> models.Gender:
+    @functools.lru_cache
+    def get_gender(self, gender_id: str | int) -> models.Gender:
         """
         Query a gender's data and return it organised in a Gender object.
 
         Args:
-            gender_id (Union[str, int]): the gender's identifier, either its ID number or its name.
+            gender_id (str | int): the gender's identifier, either its ID number or its name.
 
         Returns:
             A pokedex.models.pokemon.Gender oject of the item's data.
@@ -954,16 +955,16 @@ class PokeClient:
         response: requests.Response = requests.get(gender_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting gender data into Gender object")
+        logger.trace("Formatting gender data into Gender object")
         return models.Gender(**response.json())
 
-    @functools.lru_cache()
-    def get_growth_rate(self, growth_rate_id: Union[str, int]) -> models.GrowthRate:
+    @functools.lru_cache
+    def get_growth_rate(self, growth_rate_id: str | int) -> models.GrowthRate:
         """
         Query a growth rate's data and return it organised in a GrowthRate object.
 
         Args:
-            growth_rate_id (Union[str, int]): the growth rate's identifier, either its ID number
+            growth_rate_id (str | int): the growth rate's identifier, either its ID number
                                               or its name.
 
         Returns:
@@ -978,16 +979,16 @@ class PokeClient:
         response: requests.Response = requests.get(growth_rate_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting growth rate data into GrowthRate object")
+        logger.trace("Formatting growth rate data into GrowthRate object")
         return models.GrowthRate(**response.json())
 
-    @functools.lru_cache()
-    def get_nature(self, nature_id: Union[str, int]) -> models.Nature:
+    @functools.lru_cache
+    def get_nature(self, nature_id: str | int) -> models.Nature:
         """
         Query a nature's data and return it organised in a nature object.
 
         Args:
-            nature_id (Union[str, int]): the nature's identifier, either its ID number or its name.
+            nature_id (str | int): the nature's identifier, either its ID number or its name.
 
         Returns:
             A pokedex.models.pokemon.Nature oject of the item's data.
@@ -999,16 +1000,16 @@ class PokeClient:
         response: requests.Response = requests.get(nature_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting nature data into Nature object")
+        logger.trace("Formatting nature data into Nature object")
         return models.Nature(**response.json())
 
-    @functools.lru_cache()
-    def get_pokeathlon_stat(self, pokeathlon_stat_id: Union[str, int]) -> models.PokeathlonStat:
+    @functools.lru_cache
+    def get_pokeathlon_stat(self, pokeathlon_stat_id: str | int) -> models.PokeathlonStat:
         """
         Query a pokeathlon stat's data and return it organised in a PokeathlonStat object.
 
         Args:
-            pokeathlon_stat_id (Union[str, int]): the pokeathlon stat's identifier, either its ID
+            pokeathlon_stat_id (str | int): the pokeathlon stat's identifier, either its ID
                                                   number or its name.
 
         Returns:
@@ -1025,16 +1026,16 @@ class PokeClient:
         response: requests.Response = requests.get(pokeathlon_stat_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting pokeathlon stat data into PokeathlonStat object")
+        logger.trace("Formatting pokeathlon stat data into PokeathlonStat object")
         return models.PokeathlonStat(**response.json())
 
-    @functools.lru_cache()
-    def get_pokemon(self, pokemon_id: Union[str, int]) -> models.Pokemon:
+    @functools.lru_cache
+    def get_pokemon(self, pokemon_id: str | int) -> models.Pokemon:
         """
         Query a pokemon's data and return it organised in a Pokemon object.
 
         Args:
-            pokemon_id (Union[str, int]): the pokemon's identifier, either its ID number or its
+            pokemon_id (str | int): the pokemon's identifier, either its ID number or its
                                           name.
 
         Returns:
@@ -1047,16 +1048,16 @@ class PokeClient:
         response: requests.Response = requests.get(pokemon_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting pokemon data into Pokemon object")
+        logger.trace("Formatting pokemon data into Pokemon object")
         return models.Pokemon(**response.json())
 
-    @functools.lru_cache()
-    def get_pokemon_color(self, pokemon_color_id: Union[str, int]) -> models.PokemonColor:
+    @functools.lru_cache
+    def get_pokemon_color(self, pokemon_color_id: str | int) -> models.PokemonColor:
         """
         Query a pokemon color's data and return it organised in a PokemonColor object.
 
         Args:
-            pokemon_color_id (Union[str, int]): the pokemon color's identifier, either its ID number
+            pokemon_color_id (str | int): the pokemon color's identifier, either its ID number
                                                 or its name.
 
         Returns:
@@ -1071,16 +1072,16 @@ class PokeClient:
         response: requests.Response = requests.get(pokemon_color_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting pokemon color data into PokemonColor object")
+        logger.trace("Formatting pokemon color data into PokemonColor object")
         return models.PokemonColor(**response.json())
 
-    @functools.lru_cache()
-    def get_pokemon_form(self, pokemon_id: Union[str, int]) -> models.PokemonForm:
+    @functools.lru_cache
+    def get_pokemon_form(self, pokemon_id: str | int) -> models.PokemonForm:
         """
         Query a pokemon form's data and return it organised in a PokemonForm object.
 
         Args:
-            pokemon_id (Union[str, int]): the pokemon form's identifier, either its ID number or its
+            pokemon_id (str | int): the pokemon form's identifier, either its ID number or its
                                           name.
 
         Returns:
@@ -1095,16 +1096,16 @@ class PokeClient:
         response: requests.Response = requests.get(pokemon_form_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting pokemon form data into PokemonForm object")
+        logger.trace("Formatting pokemon form data into PokemonForm object")
         return models.PokemonForm(**response.json())
 
-    @functools.lru_cache()
-    def get_pokemon_habitat(self, pokemon_habitat_id: Union[str, int]) -> models.PokemonHabitat:
+    @functools.lru_cache
+    def get_pokemon_habitat(self, pokemon_habitat_id: str | int) -> models.PokemonHabitat:
         """
         Query a pokemon habitat's data and return it organised in a PokemonHabitat object.
 
         Args:
-            pokemon_habitat_id (Union[str, int]): the pokemon habitat's identifier, either its ID
+            pokemon_habitat_id (str | int): the pokemon habitat's identifier, either its ID
                                                   number or its name.
 
         Returns:
@@ -1121,16 +1122,16 @@ class PokeClient:
         response: requests.Response = requests.get(pokemon_habitat_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting pokemon habitat data into PokemonHabitat object")
+        logger.trace("Formatting pokemon habitat data into PokemonHabitat object")
         return models.PokemonHabitat(**response.json())
 
-    @functools.lru_cache()
-    def get_pokemon_shape(self, pokemon_shape_id: Union[str, int]) -> models.PokemonShape:
+    @functools.lru_cache
+    def get_pokemon_shape(self, pokemon_shape_id: str | int) -> models.PokemonShape:
         """
         Query a pokemon shape's data and return it organised in a PokemonShape object.
 
         Args:
-            pokemon_shape_id (Union[str, int]): the pokemon shape's identifier, either its ID
+            pokemon_shape_id (str | int): the pokemon shape's identifier, either its ID
                                                 number or its name.
 
         Returns:
@@ -1145,16 +1146,16 @@ class PokeClient:
         response: requests.Response = requests.get(pokemon_shape_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting pokemon shape data into PokemonShape object")
+        logger.trace("Formatting pokemon shape data into PokemonShape object")
         return models.PokemonShape(**response.json())
 
-    @functools.lru_cache()
-    def get_pokemon_species(self, pokemon_species_id: Union[str, int]) -> models.PokemonSpecies:
+    @functools.lru_cache
+    def get_pokemon_species(self, pokemon_species_id: str | int) -> models.PokemonSpecies:
         """
         Query a pokemon species's data and return it organised in a PokemonSpecies object.
 
         Args:
-            pokemon_species_id (Union[str, int]): the pokemon species's identifier, either its ID
+            pokemon_species_id (str | int): the pokemon species's identifier, either its ID
                                                   number or its name.
 
         Returns:
@@ -1171,16 +1172,16 @@ class PokeClient:
         response: requests.Response = requests.get(pokemon_species_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting pokemon species data into PokemonSpecies object")
+        logger.trace("Formatting pokemon species data into PokemonSpecies object")
         return models.PokemonSpecies(**response.json())
 
-    @functools.lru_cache()
-    def get_stat(self, stat_id: Union[str, int]) -> models.Stat:
+    @functools.lru_cache
+    def get_stat(self, stat_id: str | int) -> models.Stat:
         """
         Query a stat's data and return it organised in a Stat object.
 
         Args:
-            stat_id (Union[str, int]): the stat's identifier, either its ID number or its name.
+            stat_id (str | int): the stat's identifier, either its ID number or its name.
 
         Returns:
             A pokedex.models.pokemon.Stat oject of the item's data.
@@ -1192,16 +1193,16 @@ class PokeClient:
         response: requests.Response = requests.get(stat_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting stat data into Stat object")
+        logger.trace("Formatting stat data into Stat object")
         return models.Stat(**response.json())
 
-    @functools.lru_cache()
-    def get_type(self, type_id: Union[str, int]) -> models.Type:
+    @functools.lru_cache
+    def get_type(self, type_id: str | int) -> models.Type:
         """
         Query a type's data and return it organised in a Type object.
 
         Args:
-            type_id (Union[str, int]): the type's identifier, either its ID number or its name.
+            type_id (str | int): the type's identifier, either its ID number or its name.
 
         Returns:
             A pokedex.models.pokemon.Type oject of the item's data.
@@ -1213,16 +1214,16 @@ class PokeClient:
         response: requests.Response = requests.get(type_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting type data into Type object")
+        logger.trace("Formatting type data into Type object")
         return models.Type(**response.json())
 
-    @functools.lru_cache()
-    def get_language(self, language_id: Union[str, int]) -> models.Language:
+    @functools.lru_cache
+    def get_language(self, language_id: str | int) -> models.Language:
         """
         Query a language's data and return it organised in a Language object.
 
         Args:
-            language_id (Union[str, int]): the language's identifier, either its ID number or its
+            language_id (str | int): the language's identifier, either its ID number or its
                                            name.
 
         Returns:
@@ -1235,5 +1236,5 @@ class PokeClient:
         response: requests.Response = requests.get(language_query_url)
         self.validate_response_status(response)
 
-        logger.trace(f"Formatting language data into Language object")
+        logger.trace("Formatting language data into Language object")
         return models.Language(**response.json())

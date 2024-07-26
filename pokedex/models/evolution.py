@@ -4,7 +4,9 @@ Model classes for the 'Evolution' endpoint objects. Available endpoints are:
 - Evolution Triggers (https://pokeapi.co/api/v2/evolution-trigger/{id or name}/)
 """
 
-from typing import Dict, List, Optional
+from __future__ import annotations
+
+from typing import Dict, List
 
 from pydantic import BaseModel
 
@@ -12,29 +14,29 @@ from pokedex.models.commons import Name, NamedAPIResource
 
 
 class EvolutionDetail(BaseModel):
-    item: Optional[NamedAPIResource]
-    trigger: Optional[NamedAPIResource]
+    item: NamedAPIResource | None
+    trigger: NamedAPIResource | None
     gender: int
-    held_item: Optional[NamedAPIResource]
-    known_move: Optional[NamedAPIResource]
-    known_move_type: Optional[NamedAPIResource]
-    location: Optional[NamedAPIResource]
+    held_item: NamedAPIResource | None
+    known_move: NamedAPIResource | None
+    known_move_type: NamedAPIResource | None
+    location: NamedAPIResource | None
     min_level: int
     min_happiness: int
     min_beauty: int
     min_affection: int
     needs_overworld_rain: bool
-    party_species: Optional[NamedAPIResource]
-    party_type: Optional[NamedAPIResource]
+    party_species: NamedAPIResource | None
+    party_type: NamedAPIResource | None
     relative_physical_stats: int
     time_of_day: str
-    trade_species: Optional[NamedAPIResource]
+    trade_species: NamedAPIResource | None
     turn_upside_down: bool
 
 
 class ChainLink(BaseModel):
     is_baby: bool
-    species: Optional[NamedAPIResource]
+    species: NamedAPIResource | None
     evolution_details: List[EvolutionDetail]
     evolves_to: List[Dict]  # technically is List[ChainLink] but that would NameError
 
@@ -47,7 +49,7 @@ class EvolutionChain(BaseModel):
     """
 
     id: int
-    baby_trigger_item: Optional[NamedAPIResource]
+    baby_trigger_item: NamedAPIResource | None
     chain: ChainLink
 
 

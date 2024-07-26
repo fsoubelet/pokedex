@@ -4,8 +4,9 @@ Model classes for the 'Contests' endpoint objects. Available endpoints are:
 - Contest Effects (https://pokeapi.co/api/v2/contest-effect/{id}/)
 - Super Contest Effects (https://pokeapi.co/api/v2/super-contest-effect/{id}/)
 """
+from __future__ import annotations
 
-from typing import List, Optional
+from typing import List
 
 from pydantic import BaseModel
 
@@ -15,7 +16,7 @@ from pokedex.models.commons import Effect, FlavorText, NamedAPIResource
 class ContestName(BaseModel):
     name: str
     color: str
-    language: Optional[NamedAPIResource]
+    language: NamedAPIResource | None
 
 
 class ContestType(BaseModel):
@@ -25,7 +26,7 @@ class ContestType(BaseModel):
 
     id: int
     name: str
-    berry_flavor: Optional[NamedAPIResource]
+    berry_flavor: NamedAPIResource | None
     names: List[ContestName]
 
 

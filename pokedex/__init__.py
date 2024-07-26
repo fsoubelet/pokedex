@@ -1,4 +1,4 @@
-from .client import PokeClient
+from .client import PokeClient  # noqa: TID252
 
 __version__ = "0.1.1"
 
