@@ -6,11 +6,12 @@ Model classes for the 'Evolution' endpoint objects. Available endpoints are:
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import TYPE_CHECKING, Dict
 
 from pydantic import BaseModel
 
-from pokedex.models.commons import Name, NamedAPIResource
+if TYPE_CHECKING:
+    from pokedex.models.commons import Name, NamedAPIResource
 
 
 class EvolutionDetail(BaseModel):

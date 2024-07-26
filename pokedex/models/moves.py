@@ -10,17 +10,20 @@ Model classes for the 'Moves' endpoint objects. Available endpoints are:
 """
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel
 
-from pokedex.models.commons import (
-    APIResource,
-    Description,
-    MachineVersionDetail,
-    Name,
-    NamedAPIResource,
-    VerboseEffect,
-)
-from pokedex.models.pokemon import AbilityEffectChange
+if TYPE_CHECKING:
+    from pokedex.models.commons import (
+        APIResource,
+        Description,
+        MachineVersionDetail,
+        Name,
+        NamedAPIResource,
+        VerboseEffect,
+    )
+    from pokedex.models.pokemon import AbilityEffectChange
 
 
 class ContestComboDetail(BaseModel):

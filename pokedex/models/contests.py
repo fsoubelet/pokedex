@@ -6,9 +6,12 @@ Model classes for the 'Contests' endpoint objects. Available endpoints are:
 """
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel
 
-from pokedex.models.commons import Effect, FlavorText, NamedAPIResource
+if TYPE_CHECKING:
+    from pokedex.models.commons import Effect, FlavorText, NamedAPIResource
 
 
 class ContestName(BaseModel):

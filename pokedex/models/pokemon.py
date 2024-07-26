@@ -19,20 +19,23 @@ Model classes for the 'Pokémon' endpoint objects. Available endpoints are:
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel
 
-from pokedex.models.commons import (
-    APIResource,
-    Description,
-    Effect,
-    FlavorText,
-    GenerationGameIndex,
-    Name,
-    NamedAPIResource,
-    VerboseEffect,
-    VersionEncounterDetail,
-    VersionGameIndex,
-)
+if TYPE_CHECKING:
+    from pokedex.models.commons import (
+        APIResource,
+        Description,
+        Effect,
+        FlavorText,
+        GenerationGameIndex,
+        Name,
+        NamedAPIResource,
+        VerboseEffect,
+        VersionEncounterDetail,
+        VersionGameIndex,
+    )
 
 
 class AbilityEffectChange(BaseModel):

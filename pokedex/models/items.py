@@ -8,19 +8,22 @@ Model classes for the 'Items' endpoint objects. Available endpoints are:
 """
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel
 
-from pokedex.models.commons import (
-    APIResource,
-    Description,
-    Effect,
-    GenerationGameIndex,
-    MachineVersionDetail,
-    Name,
-    NamedAPIResource,
-    VerboseEffect,
-    VersionGroupFlavorText,
-)
+if TYPE_CHECKING:
+    from pokedex.models.commons import (
+        APIResource,
+        Description,
+        Effect,
+        GenerationGameIndex,
+        MachineVersionDetail,
+        Name,
+        NamedAPIResource,
+        VerboseEffect,
+        VersionGroupFlavorText,
+    )
 
 
 class ItemSprites(BaseModel):
